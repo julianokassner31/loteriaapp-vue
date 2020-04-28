@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">loteriaapp</string>
+    <string name="title_activity_main">loteriaapp</string>
+    <string name="package_name">br.com.jkassner.loteriaapp</string>
+    <string name="custom_url_scheme">br.com.jkassner.loteriaapp</string>
+</resources>

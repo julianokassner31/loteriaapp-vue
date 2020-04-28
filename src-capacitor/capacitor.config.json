@@ -1,0 +1,7 @@
+{
+  "appId": "br.com.jkassner.loteriaapp",
+  "appName": "loteriaapp",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}
