@@ -6,7 +6,7 @@
       <div class="text-h6 text-center">Marque 6 números</div>
     </q-card-section>
 
-    <div class="column">
+    <div class="column items-center">
       <div class="row justify-center">
         
         <div v-for="dezena in dezenasMegasena"
@@ -45,37 +45,43 @@
         class="justify-center"
         >
         <template  v-slot:header >
-          <DezenaConcurso 
-            :match="true"
-            :dezena="concurso.prDezena"
-          />
-          <DezenaConcurso 
-            :match="true"
-            :dezena="concurso.seDezena"
-          />
-          <DezenaConcurso 
-            :match="true"
-            :dezena="concurso.teDezena"
-          />
-          <DezenaConcurso 
-            :match="false"
-            :dezena="concurso.qaDezena"
-          />
-          <DezenaConcurso 
-            :match="true"
-            :dezena="concurso.qiDezena"
-          />
-          <DezenaConcurso 
-            :match="true"
-            :dezena="concurso.sxDezena"
-          />
+          <div class="column full-width">
+            <q-item-section>
+                <q-item-label>Ordem do sorteio</q-item-label>
+            </q-item-section>
+            
+            <div class="row justify-around q-my-sm">
+              <DezenaConcurso 
+                :match="true"
+                :dezena="concurso.prDezena"
+              />
+              <DezenaConcurso 
+                :match="true"
+                :dezena="concurso.seDezena"
+              />
+              <DezenaConcurso 
+                :match="true"
+                :dezena="concurso.teDezena"
+              />
+              <DezenaConcurso 
+                :match="false"
+                :dezena="concurso.qaDezena"
+              />
+              <DezenaConcurso 
+                :match="true"
+                :dezena="concurso.qiDezena"
+              />
+              <DezenaConcurso 
+                :match="true"
+                :dezena="concurso.sxDezena"
+              />
+            </div>
+          </div>
         </template>
       
         <q-card>
           <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-            commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
+            Ordenadas
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -134,11 +140,11 @@ export default {
 </script>
 <style lang="scss" scoped>
   .row {
-    max-width: 586px;
+    max-width: 440px;
   }
 
   .button {
-    max-width: 554px;
+    max-width: 410px;
     width: 100%;
   }
 

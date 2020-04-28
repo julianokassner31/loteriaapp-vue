@@ -1,12 +1,12 @@
 <template>
   <q-btn v-if="match" 
-    round 
-    color="green-9" 
-    :label="dezena"/>
-
+    round  
+    :label="dezena"
+    color="positive"/>
     <q-btn v-else 
     round 
-    outline 
+    outline
+    color="secondary" 
     :label="dezena"/>
 </template>
 
