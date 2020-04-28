@@ -1,17 +1,18 @@
 <template>
+<div>
   <q-card flat bordered>
         
     <q-card-section>
       <div class="text-h6 text-center">Marque 6 números</div>
     </q-card-section>
 
-    <div class="column items-center">
-      <div class="row items-start ">
+    <div class="column">
+      <div class="row justify-center">
         
         <div v-for="dezena in dezenasMegasena"
           :key="dezena">
           
-          <DezenaButton class="q-ma-sm"
+          <DezenaButton class=""
             :dezena="dezena"
             :dezenasEscolhidas="dezenasEscolhidas"
             :callback="markDezena.bind()"
@@ -31,12 +32,62 @@
       />
     </div> 
 
+  <q-list v-if="concursos && concursos.quadras.length" 
+      bordered 
+      class="rounded-borders"
+    >
+      <q-item>
+        <q-item-section>Quadras</q-item-section>
+      </q-item>
+      
+      <q-expansion-item v-for="concurso in concursos.quadras"
+        :key="concurso.id"
+        class="justify-center"
+        >
+        <template  v-slot:header >
+          <DezenaConcurso 
+            :match="true"
+            :dezena="concurso.prDezena"
+          />
+          <DezenaConcurso 
+            :match="true"
+            :dezena="concurso.seDezena"
+          />
+          <DezenaConcurso 
+            :match="true"
+            :dezena="concurso.teDezena"
+          />
+          <DezenaConcurso 
+            :match="false"
+            :dezena="concurso.qaDezena"
+          />
+          <DezenaConcurso 
+            :match="true"
+            :dezena="concurso.qiDezena"
+          />
+          <DezenaConcurso 
+            :match="true"
+            :dezena="concurso.sxDezena"
+          />
+        </template>
+      
+        <q-card>
+          <q-card-section>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+            commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+            eveniet doloribus ullam aliquid.
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
+    </q-list>
   </q-card>
+</div>
 
 </template>
 
 <script>
 import DezenaButton from '../components/button/dezena/DezenaButton.vue';
+import DezenaConcurso from '../components/button/dezena-concurso/DezenaConcurso.vue'
 import {dezenasMegasena} from '../components/button/dezena/dezenas';
 import Axios from 'axios';
 
@@ -44,13 +95,15 @@ import Axios from 'axios';
 export default {
   name: 'MegaSena',
   components: {
-    DezenaButton
+    DezenaButton,
+    DezenaConcurso
   },
 
   data() {
     return {
         dezenasMegasena: dezenasMegasena,
-        dezenasEscolhidas: []
+        dezenasEscolhidas: [],
+        concursos: null
     }
   },
 
@@ -60,7 +113,7 @@ export default {
       // TODO ARRUMAR ISSAQUI PASSAR URL EM ARQUIVO SEPARADO
       Axios.get(
         'https://loteria-api.herokuapp.com/megasena/find-concursos?dezenasUsuario='+encodeURIComponent(this.dezenasEscolhidas))
-        .then(resp => console.log(resp.data));
+        .then(resp => this.concursos = resp.data);
     },
     markDezena(dezenaEscolhida, el) {
         
@@ -87,5 +140,9 @@ export default {
   .button {
     max-width: 554px;
     width: 100%;
+  }
+
+  .teste{
+    justify-content: space-between;
   }
 </style>
