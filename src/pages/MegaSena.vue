@@ -3,7 +3,7 @@
   <q-card flat bordered>
         
     <q-card-section>
-      <div class="text-h6 text-center">Marque 6 números</div>
+      <div class="text-h6 text-center">Marque 6 dezenas</div>
     </q-card-section>
 
     <div class="column items-center">
@@ -52,27 +52,27 @@
             
             <div class="row justify-around q-my-sm">
               <DezenaConcurso 
-                :match="true"
+                :match="dezenasEscolhidas.some(d => d == concurso.prDezena)"
                 :dezena="concurso.prDezena"
               />
               <DezenaConcurso 
-                :match="true"
+                :match="dezenasEscolhidas.some(d => d == concurso.seDezena)"
                 :dezena="concurso.seDezena"
               />
               <DezenaConcurso 
-                :match="true"
+                :match="dezenasEscolhidas.some(d => d == concurso.teDezena)"
                 :dezena="concurso.teDezena"
               />
               <DezenaConcurso 
-                :match="false"
+                :match="dezenasEscolhidas.some(d => d == concurso.qaDezena)"
                 :dezena="concurso.qaDezena"
               />
               <DezenaConcurso 
-                :match="true"
+                :match="dezenasEscolhidas.some(d => d == concurso.qiDezena)"
                 :dezena="concurso.qiDezena"
               />
               <DezenaConcurso 
-                :match="true"
+                :match="dezenasEscolhidas.some(d => d == concurso.sxDezena)"
                 :dezena="concurso.sxDezena"
               />
             </div>
@@ -109,7 +109,7 @@ export default {
     return {
         dezenasMegasena: dezenasMegasena,
         dezenasEscolhidas: [],
-        concursos: null
+        concursos: null,
     }
   },
 

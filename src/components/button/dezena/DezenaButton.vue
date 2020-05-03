@@ -1,5 +1,5 @@
 /**O comportamento desse button e ser clicavel
-e alterar seu bacngrond para mostrar que foi selecionada a dezena 
+e alterar seu background para mostrar que foi selecionada a dezena 
 sendo necessario passar um funcao de callback e um numero*/
 <template>
     <q-btn
