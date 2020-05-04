@@ -67,7 +67,7 @@
                 :match="dezenasEscolhidas.some(d => d == concurso.qaDezena)"
                 :dezena="concurso.qaDezena"
               />
-              <DezenaConcurso 
+              <DezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.qiDezena)"
                 :dezena="concurso.qiDezena"
               />
