@@ -8,16 +8,14 @@
 
     <div class="column items-center">
       <div class="row justify-center">
-        
         <div v-for="dezena in dezenasMegasena"
-          :key="dezena">
-          
-          <DezenaButton class=""
+          :key="dezena"
+          class="q-pa-sm">
+          <DezenaButton
             :dezena="dezena"
             :dezenasEscolhidas="dezenasEscolhidas"
             :callback="markDezena.bind()"
           />
-        
         </div>
       </div>
       
@@ -140,15 +138,17 @@ export default {
 </script>
 <style lang="scss" scoped>
   .row {
-    max-width: 440px;
+    max-width: 580px;
   }
 
   .button {
-    max-width: 410px;
+    max-width: 580px;
     width: 100%;
   }
 
-  .teste{
-    justify-content: space-between;
-  }
+  @media(max-width: 400px) {
+        .q-pa-sm {
+            padding: 2px 2px;
+        }
+    }
 </style>
