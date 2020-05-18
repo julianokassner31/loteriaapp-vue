@@ -92,7 +92,6 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import {DezenaButton, DezenaConcurso, dezenasMegasena} from '../../../components/index.js';
-import { ConcursoMegaSena } from '../../../model/ConcursoMegaSena';
 import api from '../../../api';
 @Component({
   components: {
@@ -104,11 +103,10 @@ export default class MegaSena extends Vue {
 
   dezenasMegasena:number[] = dezenasMegasena;
   dezenasEscolhidas:number[] = [];
-  concursos:ConcursoMegaSena[] = null;
+  concursos = null;
   
 
     buscarConcursos() {
-      // TODO ARRUMAR ISSAQUI PASSAR URL EM ARQUIVO SEPARADO
       api.get(
         '/megasena/find-concursos?dezenasUsuario='+encodeURIComponent(this.dezenasEscolhidas.toString()))
         .then(resp => this.concursos = resp.data);

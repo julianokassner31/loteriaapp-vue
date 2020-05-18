@@ -7,7 +7,7 @@
       </q-card-section>
     </q-card>
     <q-card class="row justify-around col-sm-9 col-md-10">
-      <q-card v-for="pos of this.posicoesTitle"
+      <q-card v-for="pos in this.posicoesTitle"
         :key="pos"
       >
         <q-card-section>
@@ -19,7 +19,7 @@
 
   <q-card 
       v-for="key of Object.keys(counterPosicoes)"
-      :key="key"
+      :key="key.dezena"
       class="row">
       <q-card class="dezena col-sm-3 col-md-2">
         <q-card-section>
@@ -28,8 +28,8 @@
       </q-card>
       <q-card class="row justify-around col-sm-9 col-md-10">
       <q-card
-        v-for="dezena of counterPosicoes[key]"
-        :key="dezena.dezena"
+        v-for="(dezena, index) of counterPosicoes[key]"
+        :key="index-dezena.dezena"
         >
         <q-card-section>
           <div class="text-h6">{{dezena.count}}</div>
