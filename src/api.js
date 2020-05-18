@@ -1,8 +1,8 @@
 import Axios from 'axios';
 
 const url = process.env.PROD
-	? 'http://localhost:8080'
-	: 'https://loteria-api.herokuapp.com';
+	? 'https://loteria-api.herokuapp.com'
+	: 'http://localhost:8080';
 
 const API = {
 	get: uri => Axios.get(url.concat(uri)),
