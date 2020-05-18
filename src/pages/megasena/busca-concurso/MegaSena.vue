@@ -11,7 +11,7 @@
         <div v-for="dezena in dezenasMegasena"
           :key="dezena"
           class="q-pa-sm">
-          <DezenaButton
+          <dezenaButton
             :dezena="dezena"
             :dezenasEscolhidas="dezenasEscolhidas"
             :callback="markDezena.bind()"
@@ -30,7 +30,7 @@
       />
     </div> 
 
-  <q-list v-if="concursos && concursos.quadras.length" 
+  <q-list v-if="this.concursos && this.concursos.quadras && this.concursos.quadras.length" 
       bordered 
       class="rounded-borders"
     >
@@ -49,27 +49,27 @@
             </q-item-section>
             
             <div class="row justify-around q-my-sm">
-              <DezenaConcurso 
+              <dezenaConcurso 
                 :match="dezenasEscolhidas.some(d => d == concurso.prDezena)"
                 :dezena="concurso.prDezena"
               />
-              <DezenaConcurso 
+              <dezenaConcurso 
                 :match="dezenasEscolhidas.some(d => d == concurso.seDezena)"
                 :dezena="concurso.seDezena"
               />
-              <DezenaConcurso 
+              <dezenaConcurso 
                 :match="dezenasEscolhidas.some(d => d == concurso.teDezena)"
                 :dezena="concurso.teDezena"
               />
-              <DezenaConcurso 
+              <dezenaConcurso 
                 :match="dezenasEscolhidas.some(d => d == concurso.qaDezena)"
                 :dezena="concurso.qaDezena"
               />
-              <DezenaConcurso
+              <dezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.qiDezena)"
                 :dezena="concurso.qiDezena"
               />
-              <DezenaConcurso 
+              <dezenaConcurso 
                 :match="dezenasEscolhidas.some(d => d == concurso.sxDezena)"
                 :dezena="concurso.sxDezena"
               />
@@ -89,37 +89,31 @@
 
 </template>
 
-<script>
-import DezenaButton from '../components/button/dezena/DezenaButton.vue';
-import DezenaConcurso from '../components/button/dezena-concurso/DezenaConcurso.vue'
-import {dezenasMegasena} from '../components/button/dezena/dezenas';
-import Axios from 'axios';
-
-
-export default {
-  name: 'MegaSena',
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator';
+import {DezenaButton, DezenaConcurso, dezenasMegasena} from '../../../components/index.js';
+import { ConcursoMegaSena } from '../../../model/ConcursoMegaSena';
+import api from '../../../api';
+@Component({
   components: {
-    DezenaButton,
-    DezenaConcurso
-  },
+    dezenaButton: DezenaButton,
+    dezenaConcurso: DezenaConcurso
+  }
+})
+export default class MegaSena extends Vue {
 
-  data() {
-    return {
-        dezenasMegasena: dezenasMegasena,
-        dezenasEscolhidas: [],
-        concursos: null,
-    }
-  },
-
-  methods: {
+  dezenasMegasena:number[] = dezenasMegasena;
+  dezenasEscolhidas:number[] = [];
+  concursos:ConcursoMegaSena[] = null;
+  
 
     buscarConcursos() {
       // TODO ARRUMAR ISSAQUI PASSAR URL EM ARQUIVO SEPARADO
-      Axios.get(
-        'https://loteria-api.herokuapp.com/megasena/find-concursos?dezenasUsuario='+encodeURIComponent(this.dezenasEscolhidas))
+      api.get(
+        '/megasena/find-concursos?dezenasUsuario='+encodeURIComponent(this.dezenasEscolhidas.toString()))
         .then(resp => this.concursos = resp.data);
-    },
-    markDezena(dezenaEscolhida, el) {
+    }
+    markDezena(dezenaEscolhida: number, el: Element) {
         
       if(this.dezenasEscolhidas.every(d => d !== dezenaEscolhida)){
           
@@ -132,7 +126,6 @@ export default {
           this.dezenasEscolhidas = this.dezenasEscolhidas.filter(d => d !== dezenaEscolhida);
           el.classList.remove('bg-positive');
       }
-    }
   }
 }
 </script>
@@ -147,8 +140,8 @@ export default {
   }
 
   @media(max-width: 400px) {
-        .q-pa-sm {
-            padding: 2px 2px;
-        }
+    .q-pa-sm {
+        padding: 2px 2px;
     }
+  }
 </style>

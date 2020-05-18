@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CardConcurso from '../components/cards/card-concurso/CardConcurso.vue'
+import {CardConcurso} from '../components/index.js'
 
 export default {
   name: 'PageIndex',

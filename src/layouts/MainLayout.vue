@@ -62,6 +62,19 @@
           :key="link.title"
           v-bind="link"
         />
+
+        <q-separator />
+        <q-item>
+          <q-item-section>
+            <q-item-label header> Saída de dezenas </q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-separator />
+        <EssentialLink
+          v-for="link in linksSaidaDezenas"
+          :key="link.title"
+          v-bind="link"
+        />
       </q-list>
     </q-drawer>
 
@@ -86,7 +99,7 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: [
         {
-          title: 'MegaSena',
+          title: 'Megasena',
           caption: 'Já saiu aqui?',
           icon: 'code',
           link: 'megasena'
@@ -109,6 +122,14 @@ export default {
           icon: 'rss_feed',
           link: 'https://twitter.quasar.dev'
         },
+      ],
+      linksSaidaDezenas:[
+        {
+          title: 'Megasena',
+          caption: 'veja as dezenas que mais saem',
+          icon: 'rss_feed',
+          link: '/saidadezenas/megasena'
+        }
       ]
     }
   }
