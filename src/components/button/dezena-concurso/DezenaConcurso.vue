@@ -28,4 +28,14 @@ export default {
 
 <style>
 
+@media(max-width: 600px) {
+    .q-btn {
+        font-size: 10px;
+    }
+
+    .q-pa-sm {
+        padding: 2px 2px;
+    }
+}
+
 </style>

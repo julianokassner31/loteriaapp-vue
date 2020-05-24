@@ -32,7 +32,7 @@
 
   <q-list v-if="this.concursos && this.concursos.quadras && this.concursos.quadras.length" 
       bordered 
-      class="rounded-borders"
+      class="rounded-borders column items-center"
     >
       <q-item>
         <q-item-section>Quadras</q-item-section>
@@ -43,12 +43,9 @@
         class="justify-center"
         >
         <template  v-slot:header >
-          <div class="column full-width">
-            <q-item-section>
-                <q-item-label>Ordem do sorteio</q-item-label>
-            </q-item-section>
+          <div class="full-width">
             
-            <div class="row justify-around q-my-sm">
+            <div class="row justify-evenly q-my-sm">
               <dezenaConcurso 
                 :match="dezenasEscolhidas.some(d => d == concurso.prDezena)"
                 :dezena="concurso.prDezena"
@@ -104,7 +101,6 @@ export default class MegaSena extends Vue {
   dezenasMegasena:number[] = dezenasMegasena;
   dezenasEscolhidas:number[] = [];
   concursos = null;
-  
 
     buscarConcursos() {
       api.get(
@@ -134,6 +130,11 @@ export default class MegaSena extends Vue {
 
   .button {
     max-width: 580px;
+    width: 100%;
+  }
+
+  .q-expansion-item {
+    max-width: 600px;
     width: 100%;
   }
 

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="bodyContent">
   <q-card class="row">
     <q-card class="dezena col-sm-3 col-md-2">
       <q-card-section>
@@ -18,7 +18,7 @@
   </q-card>
 
   <q-card 
-      v-for="key of Object.keys(counterPosicoes)"
+      v-for="key of Object.keys(this.counterPosicoes)"
       :key="key.dezena"
       class="row items-center">
       <q-card class="dezena col-sm-3 col-md-2">
@@ -55,26 +55,50 @@ import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue
   }
 })
 export default class SaidaDezenas extends Vue {
-    private posicoesTitle = [
-      {posicao: '1ª'},
-      {posicao: '2ª'},
-      {posicao: '3ª'},
-      {posicao: '4ª'},
-      {posicao: '5ª'},
-      {posicao: '6ª'}
-    ];
 
-    private counterPosicoes: any = {};
+  private page = 0;
+  private posicoesTitle = [
+    {posicao: '1ª'},
+    {posicao: '2ª'},
+    {posicao: '3ª'},
+    {posicao: '4ª'},
+    {posicao: '5ª'},
+    {posicao: '6ª'}
+  ];
 
-    beforeMount() {
-      api.get('/megasena/counter-posicoes')
-      .then((resp: any) => this.counterPosicoes = resp.data)
+  private counterPosicoes: any = {};
+
+  private loadList() {
+   const scrollHeight = document.documentElement.scrollHeight; 
+   const scrollTop = document.documentElement.scrollTop;
+   const clientHeight = document.documentElement.clientHeight;
+    if(this.page <= 5 && scrollHeight - scrollTop === clientHeight) {
+      this.page += 1;
+      api.get(`/megasena/counter-posicoes?page=${this.page}`)
+        .then(resp => {
+          Object.keys(resp.data).forEach(key => {
+            Vue.set(this.counterPosicoes, key, resp.data[key]);
+          })
+        });
     }
+  }
 
-    public sumVezesSaida(key: string) {
-      const counter = this.counterPosicoes[parseInt(key)];
-      return counter.reduce((prev: number, c: any) => prev+= c.count, 0);
-    }
+  beforeMount() {
+    api.get('/megasena/counter-posicoes?page=0')
+    .then((resp: any) => {
+      this.counterPosicoes = resp.data;
+      window.addEventListener('scroll', this.loadList);
+    })
+  }
+
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.loadList);
+  }
+
+  public sumVezesSaida(key: string) {
+    const counter = this.counterPosicoes[parseInt(key)];
+    return counter.reduce((prev: number, c: any) => prev+= c.count, 0);
+  }
 }
 </script>
 
