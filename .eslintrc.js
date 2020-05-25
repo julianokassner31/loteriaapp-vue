@@ -79,7 +79,7 @@ module.exports = {
 		// TypeScript
 		quotes: ['warn', 'single'],
 		'@typescript-eslint/explicit-function-return-type': 'off',
-		'@typescript-eslint/no-explicit-any': 2
+		'@typescript-eslint/no-explicit-any': 'off',
 
 		// allow debugger during development only
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
