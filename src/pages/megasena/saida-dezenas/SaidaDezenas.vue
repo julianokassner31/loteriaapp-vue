@@ -72,7 +72,7 @@ export default class SaidaDezenas extends Vue {
    const scrollHeight = document.documentElement.scrollHeight; 
    const scrollTop = document.documentElement.scrollTop;
    const clientHeight = document.documentElement.clientHeight;
-    if(this.page <= 5 && scrollHeight - scrollTop === clientHeight) {
+    if(this.page <= 5 && (scrollHeight - scrollTop) === clientHeight) {
       this.page += 1;
       api.get(`/megasena/counter-posicoes?page=${this.page}`)
         .then(resp => {
@@ -87,12 +87,12 @@ export default class SaidaDezenas extends Vue {
     api.get('/megasena/counter-posicoes?page=0')
     .then((resp: any) => {
       this.counterPosicoes = resp.data;
-      window.addEventListener('scroll', this.loadList);
+      window.addEventListener('scroll', () => this.loadList());
     })
   }
 
   beforeDestroy() {
-    window.removeEventListener('scroll', this.loadList);
+    window.removeEventListener('scroll', () => this.loadList());
   }
 
   public sumVezesSaida(key: string) {
