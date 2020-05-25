@@ -37,7 +37,7 @@ module.exports = configure(function(ctx) {
 		// https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
 		framework: {
 			iconSet: 'material-icons', // Quasar icon set
-			lang: 'en-us', // Quasar language pack
+			lang: 'pt-br', // Quasar language pack
 
 			// Possible values for "all":
 			// * 'auto' - Auto-import needed Quasar components & directives
@@ -154,7 +154,7 @@ module.exports = configure(function(ctx) {
 		// Full list of options: https://quasar.dev/quasar-cli/developing-cordova-apps/configuring-cordova
 		cordova: {
 			// noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
-			id: 'Capacitor'
+			id: 'br.com.jkassner.loteriaapp'
 		},
 
 		// Full list of options: https://quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor

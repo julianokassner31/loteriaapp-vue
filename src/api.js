@@ -4,7 +4,7 @@ import { Loading } from 'quasar';
 const API = axios.create({
 	baseURL: process.env.PROD
 		? 'https://loteria-api.herokuapp.com'
-		: 'http://localhost:8080',
+		: 'https://loteria-api.herokuapp.com',
 	timeout: 3000
 });
 
