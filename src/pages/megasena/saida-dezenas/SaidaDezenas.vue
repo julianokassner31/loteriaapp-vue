@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import api from '../../../api';
+import API from '../../../api';
 import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue'
 
 @Component({
@@ -74,19 +74,17 @@ export default class SaidaDezenas extends Vue {
    const clientHeight = document.documentElement.clientHeight;
     if(this.page <= 5 && (scrollHeight - scrollTop) === clientHeight) {
       this.page += 1;
-      this.$q.loading.show();
-      api.get(`/megasena/counter-posicoes?page=${this.page}`)
-        .then(resp => {
+      API.get(`/megasena/counter-posicoes?page=${this.page}`)
+        .then((resp: any) => {
           Object.keys(resp.data).forEach(key => {
             Vue.set(this.counterPosicoes, key, resp.data[key]);
           });
-          this.$q.loading.hide();
         });
     }
   }
 
   beforeMount() {
-    api.get('/megasena/counter-posicoes?page=0')
+    API.get('/megasena/counter-posicoes?page=0')
     .then((resp: any) => {
       this.counterPosicoes = resp.data;
       window.addEventListener('scroll', () => this.loadList());

@@ -1,12 +1,33 @@
-import Axios from 'axios';
+import axios from 'axios';
+import { Loading } from 'quasar';
 
-const url = process.env.PROD
-	? 'https://loteria-api.herokuapp.com'
-	: 'http://localhost:8080';
+const API = axios.create({
+	baseURL: process.env.PROD
+		? 'https://loteria-api.herokuapp.com'
+		: 'http://localhost:8080',
+	timeout: 3000
+});
 
-const API = {
-	get: uri => Axios.get(url.concat(uri)),
-	post: uri => Axios.post(url.concat(uri))
-};
+API.interceptors.request.use(
+	function(config) {
+		Loading.show();
+		return config;
+	},
+	function(error) {
+		Loading.hide();
+		return Promise.reject(error);
+	}
+);
+
+API.interceptors.response.use(
+	function(response) {
+		Loading.hide();
+		return response;
+	},
+	function(error) {
+		Loading.hide();
+		return Promise.reject(error);
+	}
+);
 
 export default API;
