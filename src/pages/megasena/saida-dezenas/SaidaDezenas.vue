@@ -74,11 +74,13 @@ export default class SaidaDezenas extends Vue {
    const clientHeight = document.documentElement.clientHeight;
     if(this.page <= 5 && (scrollHeight - scrollTop) === clientHeight) {
       this.page += 1;
+      this.$q.loading.show();
       api.get(`/megasena/counter-posicoes?page=${this.page}`)
         .then(resp => {
           Object.keys(resp.data).forEach(key => {
             Vue.set(this.counterPosicoes, key, resp.data[key]);
-          })
+          });
+          this.$q.loading.hide();
         });
     }
   }
