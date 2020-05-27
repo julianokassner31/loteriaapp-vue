@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import API from '../../../api';
+
 import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue'
 import * as Sentry from '@sentry/browser';
 @Component({
@@ -76,7 +76,7 @@ export default class SaidaDezenas extends Vue {
     if(this.page <= 5 && (scrollHeight - scrollTop) === clientHeight) {
       this.page += 1;
       Sentry.captureMessage('Iniciando busca de resultados page '+this.page, Sentry.Severity.Log);
-      API.get(`/megasena/counter-posicoes?page=${this.page}`)
+      this.$axios.get(`/megasena/counter-posicoes?page=${this.page}`)
         .then((resp: any) => {
           Object.keys(resp.data).forEach(key => {
             Vue.set(this.counterPosicoes, key, resp.data[key]);
@@ -87,7 +87,7 @@ export default class SaidaDezenas extends Vue {
 
   beforeMount() {
     Sentry.captureMessage('Iniciando busca de resultados', Sentry.Severity.Log);
-    API.get('/megasena/counter-posicoes?page=0')
+    this.$axios.get('/megasena/counter-posicoes?page=0')
     .then((resp: any) => {
       this.counterPosicoes = resp.data;
       window.addEventListener('scroll', () => this.loadList());

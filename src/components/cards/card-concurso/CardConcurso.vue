@@ -1,5 +1,5 @@
 <template>
-<div class="col-12 col-md-6 col-lg-4 q-pa-sm">
+<div v-if="concurso" class="col-12 col-md-6 col-lg-4 q-pa-sm">
   <q-card v-bind:class="classBg">
       <q-card-section>
         <div class="row justify-between">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import API from '../../../api';
+
 export default {
 	name: 'CardConcurso',
 	
@@ -66,7 +66,7 @@ export default {
 	  
 	created() {
 		if(this.$props.uri){
-			API.get(this.$props.uri).then(resp => {
+			this.$axios.get(this.$props.uri).then(resp => {
 				this.concurso = resp.data;
 				this.ordernar();
 			});

@@ -27,6 +27,7 @@
         style="color: white; background-color: goldenrod;" 
         label="Buscar"
         @click="buscarConcursos"
+        icon="search"
       />
     </div> 
 
@@ -34,6 +35,17 @@
       bordered 
       class="rounded-borders column items-center"
     >
+    
+      <div class="q-pa-md column items-center">
+      <q-btn
+        :disable="dezenasEscolhidas.length < 6"
+        class="button q-pa-sm"
+        style=""
+        @click="concursos=undefined;dezenasEscolhidas=[];"
+        label="Limpar"
+        icon="delete"/>
+    </div> 
+ 
       <q-item>
         <q-item-section>Quadras</q-item-section>
       </q-item>
@@ -89,7 +101,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import {DezenaButton, DezenaConcurso, dezenasMegasena} from '../../../components/index.js';
-import api from '../../../api';
+
 @Component({
   components: {
     dezenaButton: DezenaButton,
@@ -103,7 +115,7 @@ export default class MegaSena extends Vue {
   concursos = null;
 
     buscarConcursos() {
-      api.get(
+      this.$axios.get(
         '/megasena/find-concursos?dezenasUsuario='+encodeURIComponent(this.dezenasEscolhidas.toString()))
         .then(resp => this.concursos = resp.data);
     }
@@ -131,6 +143,8 @@ export default class MegaSena extends Vue {
   .button {
     max-width: 580px;
     width: 100%;
+    color: white; 
+    background-color: $red-6;
   }
 
   .q-expansion-item {
