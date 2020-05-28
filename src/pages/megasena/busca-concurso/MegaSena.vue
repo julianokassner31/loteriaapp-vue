@@ -32,21 +32,21 @@
       />
     </div> 
 
-  <q-list v-if="this.concursos && this.concursos.quadras && this.concursos.quadras.length" 
-      bordered 
-      class="rounded-borders column items-center"
-    >
-    
-      <div class="q-pa-md column items-center">
+    <div
+      v-if="dezenasEscolhidas.length == 6" 
+      class="column items-center">
       <q-btn
-        :disable="dezenasEscolhidas.length < 6"
         class="button q-pa-sm"
         style=""
         @click="limpar"
         label="Limpar"
         icon="delete"/>
     </div> 
- 
+
+  <q-list v-if="this.concursos && this.concursos.quadras && this.concursos.quadras.length" 
+      bordered 
+      class="rounded-borders column items-center"
+    >
       <q-item>
         <q-item-section>Quadras</q-item-section>
       </q-item>
