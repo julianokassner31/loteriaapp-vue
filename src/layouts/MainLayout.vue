@@ -6,6 +6,7 @@
           flat
           dense
           round
+          class="menu"
           icon="menu"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
@@ -135,3 +136,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+  .menu {
+    font-size: 2em;
+  }
+</style>
