@@ -123,8 +123,10 @@ export default class MegaSena extends Vue {
 
     limpar() {
       this.dezenasEscolhidas.forEach(d => {
-        this.$refs[d][0].$el.classList.remove('bg-positive');
+        const el: any = this.$refs[d.toString()];
+        el[0].$el.classList.remove('bg-positive');
       });
+    
       this.dezenasEscolhidas = [];
       this.concursos = null;
     }
