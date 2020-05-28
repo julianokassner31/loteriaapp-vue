@@ -164,7 +164,10 @@ export default class MegaSena extends Vue {
 
   @media(max-width: 400px) {
     .q-pa-sm {
-        padding: 2px 2px;
+        padding: 1px 1px;
+    }
+    .q-btn {
+      font-size: 11px;
     }
   }
 </style>
