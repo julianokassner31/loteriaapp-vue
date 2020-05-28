@@ -12,6 +12,7 @@
           :key="dezena"
           class="q-pa-sm">
           <dezenaButton
+            :ref="dezena"
             :dezena="dezena"
             :dezenasEscolhidas="dezenasEscolhidas"
             :callback="markDezena.bind()"
@@ -41,7 +42,7 @@
         :disable="dezenasEscolhidas.length < 6"
         class="button q-pa-sm"
         style=""
-        @click="concursos=undefined;dezenasEscolhidas=[];"
+        @click="limpar"
         label="Limpar"
         icon="delete"/>
     </div> 
@@ -119,6 +120,15 @@ export default class MegaSena extends Vue {
         '/megasena/find-concursos?dezenasUsuario='+encodeURIComponent(this.dezenasEscolhidas.toString()))
         .then(resp => this.concursos = resp.data);
     }
+
+    limpar() {
+      this.dezenasEscolhidas.forEach(d => {
+        this.$refs[d][0].$el.classList.remove('bg-positive');
+      });
+      this.dezenasEscolhidas = [];
+      this.concursos = null;
+    }
+
     markDezena(dezenaEscolhida: number, el: Element) {
         
       if(this.dezenasEscolhidas.every(d => d !== dezenaEscolhida)){

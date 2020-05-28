@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Loading } from 'quasar';
+import { Loading, QSpinnerFacebook } from 'quasar';
 
 const API = axios.create({
 	baseURL: process.env.PROD
@@ -9,7 +9,10 @@ const API = axios.create({
 
 API.interceptors.request.use(
 	function(config) {
-		Loading.show();
+		Loading.show({
+			spinner: QSpinnerFacebook,
+			spinnerColor: 'positive'
+		});
 		return config;
 	},
 	function(error) {
@@ -21,6 +24,7 @@ API.interceptors.request.use(
 API.interceptors.response.use(
 	function(response) {
 		Loading.hide();
+
 		return response;
 	},
 	function(error) {

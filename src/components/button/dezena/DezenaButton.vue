@@ -27,7 +27,7 @@ export default {
     },
 
     methods: {
-        
+
         markDezena(evt) {
             const el = evt.currentTarget;
             const dezenaEscolhida = Number.parseInt(el.innerText);
