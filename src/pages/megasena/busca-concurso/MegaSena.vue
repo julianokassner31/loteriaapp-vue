@@ -21,22 +21,20 @@
       </div>
       
     </div>
+
     <div class="q-pa-md column items-center">
       <q-btn
         :disable="dezenasEscolhidas.length < 6"
-        class="button q-pa-sm"
+        class="button q-pa-md"
         style="color: white; background-color: goldenrod;" 
         label="Buscar"
         @click="buscarConcursos"
         icon="search"
       />
-    </div> 
 
-    <div
-      v-if="dezenasEscolhidas.length == 6" 
-      class="q-pa-md column items-center">
       <q-btn
-        class="button q-pa-sm"
+        v-if="dezenasEscolhidas.length == 6"
+        class="button q-my-sm q-pa-md"
         style=""
         @click="limpar"
         label="Limpar"
