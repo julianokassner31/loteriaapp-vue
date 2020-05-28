@@ -34,7 +34,7 @@
 
     <div
       v-if="dezenasEscolhidas.length == 6" 
-      class="column items-center">
+      class="q-pa-md column items-center">
       <q-btn
         class="button q-pa-sm"
         style=""
