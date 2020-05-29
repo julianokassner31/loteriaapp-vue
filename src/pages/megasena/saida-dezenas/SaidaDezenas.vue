@@ -1,5 +1,5 @@
 <template>
-<div class="bodyContent">
+<q-infinite-scroll @load="loadList" :offset="250">
   <q-card class="row">
     <q-card class="dezena col-sm-3 col-md-2">
       <q-card-section>
@@ -41,7 +41,7 @@
       </q-card>
       </q-card>
     </q-card>
-</div>
+</q-infinite-scroll>
 </template>
 
 <script lang="ts">
@@ -56,7 +56,6 @@ import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue
 })
 export default class SaidaDezenas extends Vue {
 
-  private page = 0;
   private posicoesTitle = [
     {posicao: '1ª'},
     {posicao: '2ª'},
@@ -68,18 +67,19 @@ export default class SaidaDezenas extends Vue {
 
   private counterPosicoes: any = {};
 
-  private loadList() {
+  private loadList(index: number, done: Function) {
    const scrollHeight = document.documentElement.scrollHeight; 
    const scrollTop = document.documentElement.scrollTop;
    const clientHeight = document.documentElement.clientHeight;
-    if(this.page <= 5 && (scrollHeight - scrollTop) === clientHeight) {
-      this.page += 1;
-      API.get(`/megasena/counter-posicoes?page=${this.page}`)
+    if(index <= 5 ) {
+      API.get(`/megasena/counter-posicoes?page=${index}`)
         .then((resp: any) => {
           Object.keys(resp.data).forEach(key => {
             Vue.set(this.counterPosicoes, key, resp.data[key]);
           });
+          done();
         });
+
     }
   }
 
@@ -87,12 +87,7 @@ export default class SaidaDezenas extends Vue {
     API.get('/megasena/counter-posicoes?page=0')
     .then((resp: any) => {
       this.counterPosicoes = resp.data;
-      window.addEventListener('scroll', () => this.loadList());
     })
-  }
-
-  beforeDestroy() {
-    window.removeEventListener('scroll', () => this.loadList());
   }
 
   public sumVezesSaida(key: string) {
