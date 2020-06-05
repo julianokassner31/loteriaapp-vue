@@ -20,7 +20,7 @@
   <q-card 
       v-for="key of Object.keys(this.counterPosicoes)"
       :key="key.dezena"
-      class="row q-my-sm items-center">
+      class="non-selectable row q-my-sm items-center">
       <q-card class="dezena col-sm-3 col-md-2">
         <q-card-section>
           <dezenaConcurso 

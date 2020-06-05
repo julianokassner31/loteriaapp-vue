@@ -1,5 +1,5 @@
 <template>
-  <q-page padding fixed-center style="max-width: 400px">
+  <q-page padding style="display:flex; justify-content:center">
     <q-form
       @submit="onSubmit"
       class="q-gutter-md"
@@ -23,7 +23,7 @@
       />
 
       <div>
-        <q-btn label="Login" type="submit" color="primary"/>
+        <q-btn class="q-px-xl q-py-xs" style="width: 100%" label="Login" type="submit" color="positive"/>
       </div>
     </q-form>
   </q-page>
@@ -62,3 +62,9 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+  form {
+    width: 400px;
+    min-width: 300px;
+  }
+</style>
