@@ -33,23 +33,20 @@
           Navegação
         </q-item-label>
 
-        <q-item
-          clickable
-          tag="a"
-          to="/"
-        >
-          <q-item-section
-          avatar
-          >
-            <q-icon name="home" />
-          </q-item-section>
+        <EssentialLink
+          v-bind="{
+            title: 'Home',
+            icon: 'home',
+            link: '/'
+          }"
+        />
 
-          <q-item-section>
-            <q-item-label> Home </q-item-label>
-            
-          </q-item-section>
-        </q-item>
-
+        <q-separator />
+        
+        <EssentialLink
+          v-bind="linkLogin"
+        />
+        
         <q-separator />
         <q-item>
           <q-item-section>
@@ -97,13 +94,20 @@ export default {
 
   data () {
     return {
+
+      linkLogin: {
+        title: 'Login',
+        caption: 'Faça seu login',
+        icon: 'person',
+        link: '/login'
+      },
       leftDrawerOpen: false,
       essentialLinks: [
         {
           title: 'Megasena',
           caption: 'Já saiu aqui?',
           icon: 'code',
-          link: 'megasena'
+          link: '/megasena'
         },
         {
           title: 'Lotofácil',

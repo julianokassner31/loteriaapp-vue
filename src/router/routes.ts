@@ -13,6 +13,10 @@ const routes: RouteConfig[] = [
 			{
 				path: 'saidadezenas/megasena',
 				component: () => import('pages/megasena/saida-dezenas/SaidaDezenas.vue')
+			},
+			{
+				path: 'login',
+				component: () => import('pages/login/Login.vue')
 			}
 		]
 	}
