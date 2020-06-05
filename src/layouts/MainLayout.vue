@@ -142,6 +142,6 @@ export default {
 </script>
 <style lang="scss" scoped>
   .menu {
-    font-size: 2em;
+    font-size: 1.2em;
   }
 </style>

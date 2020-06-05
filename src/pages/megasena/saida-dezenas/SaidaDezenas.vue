@@ -1,5 +1,5 @@
 <template>
-<q-infinite-scroll @load="loadList" :offset="250">
+<q-infinite-scroll class="q-mb-lg" @load="loadList" :offset="250">
   <q-card class="row">
     <q-card class="dezena col-sm-3 col-md-2">
       <q-card-section>
@@ -41,6 +41,9 @@
       </q-card>
       </q-card>
     </q-card>
+    <q-page-scroller position="bottom-right" :scroll-offset="1000" :offset="[18, 18]">
+      <q-btn fab icon="keyboard_arrow_up" color="yellow-14" />
+    </q-page-scroller>
 </q-infinite-scroll>
 </template>
 
@@ -111,9 +114,16 @@ export default class SaidaDezenas extends Vue {
   .q-card__section {
     padding: 10px;
   }
+
   @media (max-width: 1000px){
     .posicao {
       display: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .q-btn {
+      font-size: 1rem;    
     }
   }
 </style>
