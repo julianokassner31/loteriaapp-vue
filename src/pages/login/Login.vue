@@ -21,10 +21,9 @@
         lazy-rules
         :rules="[ val => val => val && val.length > 0 || 'Por favor informe a senha']"
       />
+      
+      <q-btn size="lg" style="width:96%" label="Login" type="submit" color="positive"/>
 
-      <div>
-        <q-btn class="q-px-xl q-py-xs" style="width: 100%" label="Login" type="submit" color="positive"/>
-      </div>
     </q-form>
   </q-page>
 </template>
