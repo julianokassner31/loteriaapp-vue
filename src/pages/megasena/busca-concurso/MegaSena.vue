@@ -25,7 +25,8 @@
     <div class="q-pa-md column items-center">
       <q-btn
         :disable="dezenasEscolhidas.length < 6"
-        class="button q-pa-md"
+        class="button"
+        size="lg"
         style="color: white; background-color: goldenrod;" 
         label="Buscar"
         @click="buscarConcursos"
@@ -34,8 +35,8 @@
 
       <q-btn
         v-if="dezenasEscolhidas.length == 6"
-        class="button q-my-sm q-pa-md"
-        style=""
+        class="button"
+        size="lg"
         @click="limpar"
         label="Limpar"
         icon="delete"/>
@@ -155,6 +156,7 @@ export default class MegaSena extends Vue {
     width: 100%;
     color: white; 
     background-color: $red-6;
+    margin-top: 0.5rem;
   }
 
   .q-expansion-item {

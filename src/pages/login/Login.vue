@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import LocalStorageManager from 'src/util/LocalStorageManager';
+
 export default {
   name: 'PageName',
 
@@ -45,16 +47,21 @@ export default {
     onSubmit() {
       this.$axios.post('/auth', this.form)
       .then(resp => {
+        const usuario = resp.data.username;
         this.$q.notify({
           type: 'positive',
           position:'top',
-          message: 'Login efetuado com sucesso!'
+          message: `Bem vindo de volta ${usuario}`
         })
+      
+      LocalStorageManager.setToken(resp.data.token);
+      this.$store.commit('usuario/setNomeUsuario', usuario);
+
       }).catch(err => {
         this.$q.notify({
           type: 'negative',
           position:'top',
-          message: 'Login ou senha inexistente!'
+          message: 'Login ou senha inválidos!'
         })
       });
     }

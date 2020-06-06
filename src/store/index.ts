@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
+import usuario from './usuario';
 
 // import example from './module-example'
 // import exampleState from './module-example/state'
@@ -10,23 +11,23 @@ import Vuex from 'vuex';
  */
 
 export interface StoreInterface {
-  // Define your own store structure, using submodules if needed
-  // example: typeof exampleState;
-  example: unknown;
+	// Define your own store structure, using submodules if needed
+	// example: typeof exampleState;
+	example: unknown;
 }
 
-export default store(function ({ Vue }) {
-  Vue.use(Vuex);
+export default store(function({ Vue }) {
+	Vue.use(Vuex);
 
-  const Store = new Vuex.Store({
-    modules: {
-      // example
-    },
+	const Store = new Vuex.Store({
+		modules: {
+			usuario
+		},
 
-    // enable strict mode (adds overhead!)
-    // for dev mode only
-    strict: !!process.env.DEV
-  });
+		// enable strict mode (adds overhead!)
+		// for dev mode only
+		strict: !!process.env.DEV
+	});
 
-  return Store;
-})
+	return Store;
+});

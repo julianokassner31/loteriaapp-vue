@@ -13,7 +13,7 @@
         />
 
         <q-toolbar-title class="bg-positive text-center">
-          Resultados dos Concursos
+          Resultados dos Concursos {{usuario}}
         </q-toolbar-title>
 
       </q-toolbar>
@@ -44,7 +44,12 @@
         <q-separator />
         
         <EssentialLink
-          v-bind="linkLogin"
+          v-bind="{
+            title: 'Login',
+            caption: 'Faça seu login',
+            icon: 'person',
+            link: '/login'
+          }"
         />
         
         <q-separator />
@@ -56,8 +61,8 @@
         <q-separator />
         
         <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
+          v-for="(link, index) in essentialLinks"
+          :key="'link'+index"
           v-bind="link"
         />
 
@@ -69,8 +74,8 @@
         </q-item>
         <q-separator />
         <EssentialLink
-          v-for="link in linksSaidaDezenas"
-          :key="link.title"
+          v-for="(link, index) in linksSaidaDezenas"
+          :key="'saida'+index"
           v-bind="link"
         />
       </q-list>
@@ -94,13 +99,6 @@ export default {
 
   data () {
     return {
-
-      linkLogin: {
-        title: 'Login',
-        caption: 'Faça seu login',
-        icon: 'person',
-        link: '/login'
-      },
       leftDrawerOpen: false,
       essentialLinks: [
         {
@@ -134,8 +132,22 @@ export default {
           caption: 'veja as dezenas que mais saem',
           icon: 'rss_feed',
           link: '/saidadezenas/megasena'
+        },
+        {
+          title: 'Sena',
+          caption: 'veja as dezenas que mais saem',
+          icon: 'rss_feed',
+          link: '/saidadezenas/megasena'
         }
       ]
+    }
+  },
+
+  computed: {
+    usuario: {
+      get () {
+        return this.$store.state.usuario.nomeUsuario
+      }
     }
   }
 }
