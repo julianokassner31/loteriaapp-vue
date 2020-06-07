@@ -13,7 +13,6 @@ export default class Request {
 					headers: this.headers
 				}),
 			get: (url: string) => {
-				debugger;
 				axios.get(url, {
 					headers: this.headers
 				});
