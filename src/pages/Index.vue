@@ -1,34 +1,18 @@
 <template>
  
   <div class="q-pa-md row items-start justify-between">
-    <q-carousel
-      animated
-      arrows
-      navigation
-    >
-      <q-carousel-slide :name="1">
-        <card-concurso
-          key="12113"
-          title="Teste"
-          classBg="bg-megasena"
-          uri="/megasena"
-          color="positive"
-        />
-      </q-carousel-slide>
-      
-    </q-carousel>
-    <!-- <CardConcurso v-for="loteria of tipoLoteria"
+    <CardConcurso v-for="loteria of tipoLoteria"
       :key="loteria.id"
       :title="loteria.title" 
       :classBg="loteria.classBg"
       :uri="loteria.uri"
       :color="loteria.color"
-    /> -->
+    />
   </div>
 </template>
 
 <script>
-import {CardConcurso} from '../components/index.js'
+import {CardConcurso} from '../components/index.js';
 
 export default {
   name: 'PageIndex',

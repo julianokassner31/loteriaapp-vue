@@ -13,9 +13,10 @@
         />
 
         <q-toolbar-title class="bg-positive text-center">
-          Resultados dos Concursos {{usuario}}
+          Resultados dos Concursos
         </q-toolbar-title>
-
+        
+        <Login />
       </q-toolbar>
     </q-header>
 
@@ -38,17 +39,6 @@
             title: 'Home',
             icon: 'home',
             link: '/'
-          }"
-        />
-
-        <q-separator />
-        
-        <EssentialLink
-          v-bind="{
-            title: 'Login',
-            caption: 'Faça seu login',
-            icon: 'person',
-            link: '/login'
           }"
         />
         
@@ -89,12 +79,14 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink'
+import { Login } from 'components/index.js';
 
 export default {
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    EssentialLink,
+    Login
   },
 
   data () {
@@ -140,14 +132,6 @@ export default {
           link: '/saidadezenas/megasena'
         }
       ]
-    }
-  },
-
-  computed: {
-    usuario: {
-      get () {
-        return this.$store.state.usuario.nomeUsuario
-      }
     }
   }
 }
