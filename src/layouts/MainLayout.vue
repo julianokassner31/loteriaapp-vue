@@ -13,7 +13,7 @@
         />
 
         <q-toolbar-title class="bg-positive text-center">
-          Resultados dos Concursos
+          {{titleHeader}}
         </q-toolbar-title>
         
         <Login />
@@ -27,21 +27,22 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Navegação
-        </q-item-label>
-
+        <q-item>
+          <q-item-section>
+            <q-item-label header> Menu </q-item-label>
+          </q-item-section>
+        </q-item>
+        
+        <q-separator/>
+        
         <EssentialLink
           v-bind="{
             title: 'Home',
             icon: 'home',
-            link: '/'
+            link: '/',
+            titleHeader: 'Últimos concursos'
           }"
         />
-        
         <q-separator />
         <q-item>
           <q-item-section>
@@ -49,17 +50,15 @@
           </q-item-section>
         </q-item>
         <q-separator />
-        
         <EssentialLink
           v-for="(link, index) in essentialLinks"
           :key="'link'+index"
           v-bind="link"
         />
-
         <q-separator />
         <q-item>
           <q-item-section>
-            <q-item-label header> Saída de dezenas </q-item-label>
+            <q-item-label header>Quantas X já saiu</q-item-label>
           </q-item-section>
         </q-item>
         <q-separator />
@@ -68,9 +67,22 @@
           :key="'saida'+index"
           v-bind="link"
         />
+        <q-separator />
+        <div v-if="nomeUsuario">
+          <q-item>
+            <q-item-section>
+              <q-item-label header> Atualizar Resultados </q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-separator />
+          <EssentialLink
+            v-for="(link, index) in linksSeguros"
+            :key="'linkseguro'+index"
+            v-bind="link"
+          />
+        </div>
       </q-list>
     </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -79,6 +91,7 @@
 
 <script>
 import EssentialLink from 'components/EssentialLink'
+import AtualizaTitleHeader from 'src/util/AtulizaTitleHeader';
 import { Login } from 'components/index.js';
 
 export default {
@@ -95,44 +108,50 @@ export default {
       essentialLinks: [
         {
           title: 'Megasena',
-          caption: 'Já saiu aqui?',
-          icon: 'code',
-          link: '/megasena'
-        },
-        {
-          title: 'Lotofácil',
-          caption: 'ou aqui?',
-          icon: 'chat',
-          link: 'https://chat.quasar.dev'
+          link: '/megasena',
+          icon: 'done',
+          titleHeader: 'Meu jogo já saiu?'
         },
         {
           title: 'Lotomania',
-          caption: 'talvez aqui?',
-          icon: 'record_voice_over',
-          link: 'https://forum.quasar.dev'
-        },
-        {
-          title: 'Sena',
-          caption: 'quem sabe aqui?',
-          icon: 'rss_feed',
-          link: 'https://twitter.quasar.dev'
-        },
+          link: '/lotomania',
+          icon: 'done',
+          titleHeader: 'Meu jogo já saiu?'
+        }
       ],
       linksSaidaDezenas:[
         {
           title: 'Megasena',
-          caption: 'veja as dezenas que mais saem',
-          icon: 'rss_feed',
-          link: '/saidadezenas/megasena'
-        },
+          link: '/saidadezenas/megasena',
+          icon: 'format_list_numbered',
+          titleHeader: 'Quantas X já saiu'
+        }
+      ],
+      linksSeguros: [
         {
-          title: 'Sena',
-          caption: 'veja as dezenas que mais saem',
-          icon: 'rss_feed',
-          link: '/saidadezenas/megasena'
+          title: 'Megasena',
+          action: '/saidadezenas/megasena',
+          icon: 'loop',
+          titleHeader: 'Atulizar resultados Megasena'
         }
       ]
     }
+  },
+
+  mounted(){
+    AtualizaTitleHeader.atualizar(this.$store, 'Últimos concursos');
+  },
+  computed: {
+      nomeUsuario: {
+          get () {
+              return this.$store.state.usuario.nomeUsuario
+          }
+      },
+      titleHeader: {
+          get () {
+              return this.$store.state.titleHeader.titleHeader
+          }
+      }
   }
 }
 </script>

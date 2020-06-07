@@ -11,6 +11,10 @@ const routes: RouteConfig[] = [
 				component: () => import('pages/megasena/busca-concurso/MegaSena.vue')
 			},
 			{
+				path: 'lotomania',
+				component: () => import('pages/lotomania/busca-concurso/Lotomania.vue')
+			},
+			{
 				path: 'saidadezenas/megasena',
 				component: () => import('pages/megasena/saida-dezenas/SaidaDezenas.vue')
 			},

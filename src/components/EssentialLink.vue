@@ -3,6 +3,7 @@
     clickable
     tag="a"
     :to="link"
+    @click="setTitleHeader"
   >
     <q-item-section
       v-if="icon"
@@ -42,6 +43,17 @@ export default {
     icon: {
       type: String,
       default: ''
+    },
+
+    titleHeader: {
+      type: String,
+      default: ''
+    }
+  },
+
+  methods: {
+    setTitleHeader() {
+      this.$store.commit('titleHeader/setTitleHeader', this.$props.titleHeader);
     }
   }
 }

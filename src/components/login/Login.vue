@@ -6,9 +6,7 @@
     to="/login"
 >
     <q-chip>
-        <q-avatar>
-            <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-        </q-avatar>
+        <q-avatar icon="account_circle"/>
         {{nomeUsuario || 'Login'}}
     </q-chip>
 </q-item>

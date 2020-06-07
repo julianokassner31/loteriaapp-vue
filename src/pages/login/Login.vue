@@ -2,7 +2,7 @@
   <q-page padding style="display:flex; justify-content:center">
     <div>
       <q-form v-if="!nomeUsuario"
-        @submit="onSubmit"
+        @submit="login"
         class="q-gutter-md"
       >
         <q-input
@@ -40,7 +40,9 @@
 </template>
 
 <script>
-import LocalStorageManager from 'src/util/LocalStorageManager';
+import LocalStorageManager from '../../util/LocalStorageManager';
+import Request from '../../util/Request';
+import AtualizaTitleHeader from 'src/util/AtulizaTitleHeader';
 
 export default {
   name: 'Login',
@@ -54,6 +56,10 @@ export default {
     }
   },
 
+  created(){
+    AtualizaTitleHeader.atualizar(this.$store, 'Faça seu Login');
+  },
+
   computed: {
       nomeUsuario: {
           get () {
@@ -63,7 +69,7 @@ export default {
   },
 
   methods: {
-    onSubmit() {
+    login() {
       this.$axios.post('/auth', this.form)
       .then(resp => {
         const usuario = resp.data.username;

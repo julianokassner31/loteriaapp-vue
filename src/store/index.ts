@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
+import titleHeader from './titleHeader';
 import usuario from './usuario';
 
 // import example from './module-example'
@@ -21,7 +22,8 @@ export default store(function({ Vue }) {
 
 	const Store = new Vuex.Store({
 		modules: {
-			usuario
+			usuario,
+			titleHeader
 		},
 
 		// enable strict mode (adds overhead!)
