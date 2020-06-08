@@ -20,6 +20,7 @@
 			class="wrap row items-center justify-between"> 
 			<q-btn v-for="dezena of dezenas"
 				:key="dezena"
+				:style="$q.platform.is.cordova ? 'font-size: 1rem;': 'font-size: 0.9rem;'"
 				disable
 				round
 				:color="color" 
@@ -102,7 +103,6 @@ export default {
 <style lang="scss" scoped>
 	.q-btn {
 		font-weight: 900 !important;
-		font-size: 1rem !important;
 		opacity: 2 !important;
 	}
 	.q-card {

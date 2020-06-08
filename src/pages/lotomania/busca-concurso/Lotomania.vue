@@ -10,7 +10,7 @@
       <div class="row justify-between">
         <div v-for="dezena in dezenasLotoMania"
           :key="dezena"
-          class="q-pa-sm">
+          :class="$q.platform.is.cordova ? 'q-pa-sm-mobile' : 'q-pa-sm'">
           <dezenaButton
             :ref="dezena"
             :dezena="dezena"
@@ -165,12 +165,12 @@ export default class LotoMania extends Vue {
   }
 
   @media(max-width: 400px) {
-    .q-pa-sm {
-        padding: 5px 15px;
+    .q-pa-sm-mobile {
+        padding: 2px 15px;
     }
 
-    .q-btn {
-      font-size: 1rem;
+    .q-pa-sm {
+        padding: 2px 10px;
     }
   }
 </style>

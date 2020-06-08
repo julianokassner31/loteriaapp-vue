@@ -10,7 +10,7 @@
       <div class="row justify-center">
         <div v-for="dezena in dezenasMegasena"
           :key="dezena"
-          class="q-pa-sm">
+          :class="$q.platform.is.cordova ? 'q-pa-sm-mobile' : 'q-pa-sm'">
           <dezenaButton
             :ref="dezena"
             :dezena="dezena"
@@ -165,8 +165,11 @@ export default class MegaSena extends Vue {
   }
 
   @media(max-width: 400px) {
-    .q-pa-sm {
+    .q-pa-sm-mobile {
         padding: 2px 10px;
+    }
+    .q-pa-sm {
+        padding: 2px 5px;
     }
   }
 </style>
