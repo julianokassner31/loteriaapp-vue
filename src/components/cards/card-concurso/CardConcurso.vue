@@ -102,7 +102,7 @@ export default {
 <style lang="scss" scoped>
 	.q-btn {
 		font-weight: 900 !important;
-		font-size: .75rem !important;
+		font-size: 1rem !important;
 		opacity: 2 !important;
 	}
 	.q-card {

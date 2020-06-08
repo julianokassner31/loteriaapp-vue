@@ -34,7 +34,7 @@
       />
 
       <q-btn
-        v-if="dezenasEscolhidas.length == 6"
+        v-if="dezenasEscolhidas.length > 1"
         class="button"
         size="lg"
         @click="limpar"
@@ -166,10 +166,7 @@ export default class MegaSena extends Vue {
 
   @media(max-width: 400px) {
     .q-pa-sm {
-        padding: 1px 1px;
-    }
-    .q-btn {
-      font-size: 11px;
+        padding: 2px 10px;
     }
   }
 </style>

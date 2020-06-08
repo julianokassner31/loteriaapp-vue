@@ -166,14 +166,11 @@ export default class LotoMania extends Vue {
 
   @media(max-width: 400px) {
     .q-pa-sm {
-        padding: 1px 1px;
-    }
-    .q-btn {
-      font-size: 11px;
+        padding: 5px 15px;
     }
 
-     .row {
-        max-width: 209px;
-      }
+    .q-btn {
+      font-size: 1rem;
+    }
   }
 </style>

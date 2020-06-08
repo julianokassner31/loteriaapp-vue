@@ -39,11 +39,7 @@ export default {
 <style lang="scss" scoped>
     @media(max-width: 400px) {
         .q-btn {
-            font-size: 10px;
-        }
-
-        .q-pa-sm {
-            padding: 2px 2px;
+            font-size: 1rem;
         }
     }
     
