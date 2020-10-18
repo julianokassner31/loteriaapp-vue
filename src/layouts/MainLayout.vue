@@ -15,7 +15,7 @@
         <q-toolbar-title class="bg-positive text-center">
           {{titleHeader}}
         </q-toolbar-title>
-        
+
         <Login />
       </q-toolbar>
     </q-header>
@@ -32,9 +32,9 @@
             <q-item-label header> Menu </q-item-label>
           </q-item-section>
         </q-item>
-        
+
         <q-separator/>
-        
+
         <EssentialLink
           v-bind="{
             title: 'Home',
@@ -106,18 +106,12 @@ export default {
     return {
       leftDrawerOpen: false,
       essentialLinks: [
-        {
-          title: 'Megasena',
-          link: '/megasena',
-          icon: 'done',
-          titleHeader: 'Meu jogo já saiu?'
-        },
-        {
-          title: 'Lotomania',
-          link: '/lotomania',
-          icon: 'done',
-          titleHeader: 'Meu jogo já saiu?'
-        }
+							{
+								title: 'Buscar Concursos',
+								link: '/buscarjogos',
+								icon: 'done',
+								titleHeader: 'Meu jogo já saiu?'
+							}
       ],
       linksSaidaDezenas:[
         {
@@ -132,7 +126,7 @@ export default {
           title: 'Megasena',
           action: '/saidadezenas/megasena',
           icon: 'loop',
-          titleHeader: 'Atulizar resultados Megasena'
+          titleHeader: 'Atualizar resultados Megasena'
         }
       ]
     }

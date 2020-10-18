@@ -1,7 +1,7 @@
 <template>
 <div>
   <q-card flat bordered>
-        
+
     <q-card-section>
       <div class="text-h6 text-center">Marque 6 dezenas</div>
     </q-card-section>
@@ -19,7 +19,7 @@
           />
         </div>
       </div>
-      
+
     </div>
 
     <div class="q-pa-md column items-center">
@@ -27,7 +27,7 @@
         :disable="dezenasEscolhidas.length < 6"
         class="button"
         size="lg"
-        style="color: white; background-color: goldenrod;" 
+        style="color: white; background-color: goldenrod;"
         label="Buscar"
         @click="buscarConcursos"
         icon="search"
@@ -40,37 +40,37 @@
         @click="limpar"
         label="Limpar"
         icon="delete"/>
-    </div> 
+    </div>
 
-  <q-list v-if="this.concursos && this.concursos.quadras && this.concursos.quadras.length" 
-      bordered 
+  <q-list v-if="this.concursos && this.concursos.quadras && this.concursos.quadras.length"
+      bordered
       class="rounded-borders column items-center"
     >
       <q-item>
         <q-item-section>Quadras</q-item-section>
       </q-item>
-      
+
       <q-expansion-item v-for="concurso in concursos.quadras"
         :key="concurso.id"
         class="justify-center"
         >
         <template  v-slot:header >
           <div class="full-width">
-            
+
             <div class="row justify-evenly q-my-sm">
-              <dezenaConcurso 
+              <dezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.prDezena)"
                 :dezena="concurso.prDezena"
               />
-              <dezenaConcurso 
+              <dezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.seDezena)"
                 :dezena="concurso.seDezena"
               />
-              <dezenaConcurso 
+              <dezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.teDezena)"
                 :dezena="concurso.teDezena"
               />
-              <dezenaConcurso 
+              <dezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.qaDezena)"
                 :dezena="concurso.qaDezena"
               />
@@ -78,14 +78,14 @@
                 :match="dezenasEscolhidas.some(d => d == concurso.qiDezena)"
                 :dezena="concurso.qiDezena"
               />
-              <dezenaConcurso 
+              <dezenaConcurso
                 :match="dezenasEscolhidas.some(d => d == concurso.sxDezena)"
                 :dezena="concurso.sxDezena"
               />
             </div>
           </div>
         </template>
-      
+
         <q-card>
           <q-card-section>
             Ordenadas
@@ -100,7 +100,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import {DezenaButton, DezenaConcurso, dezenasMegasena} from '../../../components/index.js';
+import {DezenaButton, DezenaConcurso, dezenasMegasena} from 'components/index.js';
 
 @Component({
   components: {
@@ -125,15 +125,15 @@ export default class MegaSena extends Vue {
         const el: any = this.$refs[d.toString()];
         el[0].$el.classList.remove('bg-positive');
       });
-    
+
       this.dezenasEscolhidas = [];
       this.concursos = null;
     }
 
     markDezena(dezenaEscolhida: number, el: Element) {
-        
+
       if(this.dezenasEscolhidas.every(d => d !== dezenaEscolhida)){
-          
+
           if(this.dezenasEscolhidas.length < 6){
               this.dezenasEscolhidas.push(dezenaEscolhida);
               el.classList.add('bg-positive');
@@ -154,7 +154,7 @@ export default class MegaSena extends Vue {
   .button {
     max-width: 580px;
     width: 100%;
-    color: white; 
+    color: white;
     background-color: $red-6;
     margin-top: 0.5rem;
   }

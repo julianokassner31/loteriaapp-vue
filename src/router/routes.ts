@@ -7,12 +7,8 @@ const routes: RouteConfig[] = [
 		children: [
 			{ path: '', component: () => import('pages/Index.vue') },
 			{
-				path: 'megasena',
-				component: () => import('pages/megasena/busca-concurso/MegaSena.vue')
-			},
-			{
-				path: 'lotomania',
-				component: () => import('pages/lotomania/busca-concurso/Lotomania.vue')
+				path: 'buscarjogos',
+				component: () => import('pages/../components/buscar-concurso/BuscarConcurso.vue')
 			},
 			{
 				path: 'saidadezenas/megasena',
