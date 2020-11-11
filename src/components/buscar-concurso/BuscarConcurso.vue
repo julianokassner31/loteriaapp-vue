@@ -4,17 +4,17 @@
 			filled
 			v-model="model"
 			:options="options"
-			label="Standard"
+			label="Selecione"
 			emit-value
 			bg-color="white"
 			v-bind:outlined="true"
 		>
 		</q-select>
 
-		<div v-if="model === 'Megasena'">
-			<MegaSena v-bind:is-cadastro="true"/>
+		<div v-if="model === 'MEGASENA'">
+			<MegaSena v-bind:is-cadastro="false"/>
 		</div>
-		<div v-if="model === 'Lotofácil'">
+		<div v-if="model === 'LOTOFACIL'">
 			<Lotomania v-bind:is-cadastro="false"/>
 		</div>
 
@@ -24,6 +24,7 @@
 <script>
 	import MegaSena from 'src/components/buscar-concurso/megasena/MegaSena';
 	import Lotomania from 'src/components/buscar-concurso/lotomania/Lotomania';
+	import {tiposLoteria} from '../index';
 
 	export default {
 		name: 'BuscarConcurso',
@@ -33,10 +34,10 @@
 		},
 		data() {
 			return {
-				model: 'Megasena',
+				model: tiposLoteria.MEGASENA,
 				options: [
-					'Megasena',
-					'Lotofácil'
+					tiposLoteria.MEGASENA,
+					tiposLoteria.LOTOFACIL
 				]
 			};
 		}

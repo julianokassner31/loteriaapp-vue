@@ -125,7 +125,7 @@
 
 		buscarConcursos() {
 			this.$axios.get(
-				'/megasena/find-concursos?dezenasUsuario=' + encodeURIComponent(this.dezenasEscolhidas.toString()))
+				'/megasena/findConcursos?dezenasUsuario=' + encodeURIComponent(this.dezenasEscolhidas.toString()))
 				.then(resp => this.concursos = resp.data);
 		}
 

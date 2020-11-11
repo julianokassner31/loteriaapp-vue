@@ -4,26 +4,26 @@
       <q-card-section>
         <div class="row justify-between">
 			<div class="text-h6 title">{{title}}</div>
-			<div 
-				v-if="concurso.acumulado" 
+			<div
+				v-if="concurso.acumulado"
 				class="text-h6 title">
 				Acumulou!!!
 			</div>
 		</div>
-		
+
         <div class="q-pb-sm text-subtitle2 title">Concurso nº {{concurso.idConcurso}} {{concurso.dtSorteio | dateFormat('DD/MM/YYYY')}}</div>
-		
-		<div v-if="!ordermSorteio" class="caption">Orderm sorteio</div>
-		<div v-if="ordermSorteio" class="caption">Orderm natural</div>
+
+		<div v-if="!ordemSorteio" class="caption">Orderm sorteio</div>
+		<div v-if="ordemSorteio" class="caption">Orderm natural</div>
 		<div
-			@click="ordernar()" 
-			class="wrap row items-center justify-between"> 
+			@click="ordernar()"
+			class="wrap row items-center justify-between">
 			<q-btn v-for="dezena of dezenas"
 				:key="dezena"
 				:style="$q.platform.is.cordova ? 'font-size: 1rem;': 'font-size: 0.9rem;'"
 				disable
 				round
-				:color="color" 
+				:color="color"
 				:label="dezena"
         	/>
 		</div>
@@ -36,7 +36,7 @@
 
 export default {
 	name: 'CardConcurso',
-	
+
 	props: {
 		title: {
 			type: String,
@@ -61,10 +61,10 @@ export default {
     	return {
 			concurso: undefined,
 			dezenas: [],
-			ordermSorteio: true
+			ordemSorteio: true
 		}
 	  },
-	  
+
 	created() {
 		if(this.$props.uri){
 			this.$axios.get(this.$props.uri).then(resp => {
@@ -73,28 +73,42 @@ export default {
 			});
 		}
 	},
-	
+
 	methods: {
 		ordemConcurso(){
 			this.dezenas = [
-				this.concurso.prDezena, 
+				this.concurso.prDezena,
 				this.concurso.seDezena,
 				this.concurso.teDezena,
 				this.concurso.qaDezena,
 				this.concurso.qiDezena,
-				this.concurso.sxDezena,
-			]
+				this.concurso.sxDezena
+			];
+
+			if(this.$props.uri === '/lotofacil') {
+				this.dezenas = this.dezenas.concat([
+					this.concurso.stDezena,
+					this.concurso.otDezena,
+					this.concurso.noDezena,
+					this.concurso.dcDezena,
+					this.concurso.dprDezena,
+					this.concurso.dseDezena,
+					this.concurso.dteDezena,
+					this.concurso.dqaDezena,
+					this.concurso.dqiDezena
+				]);
+			}
 		},
 
 		ordernar(){
 
-			if(this.ordermSorteio){
+			if(this.ordemSorteio){
 				this.ordemConcurso();
 			} else {
 				this.dezenas.sort((a,b) => a < b ? -1 : 1);
 			}
 
-			this.ordermSorteio = !this.ordermSorteio;
+			this.ordemSorteio = !this.ordemSorteio;
 		}
 	}
 }

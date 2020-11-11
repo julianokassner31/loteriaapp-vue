@@ -15,6 +15,10 @@ const routes: RouteConfig[] = [
 				component: () => import('pages/megasena/saida-dezenas/SaidaDezenas.vue')
 			},
 			{
+				path: 'counterPosicao',
+				component: () => import('pages/counterPosicao/CounterPosicao.vue')
+			},
+			{
 				path: 'login',
 				component: () => import('pages/login/Login.vue')
 			}
