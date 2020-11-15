@@ -37,7 +37,7 @@
 		data() {
 			return {
 				tpLoteria: '',
-				tiposLoteria: tiposLoteria
+				tiposLoterias: tiposLoteria
 			};
 		}
 	};
