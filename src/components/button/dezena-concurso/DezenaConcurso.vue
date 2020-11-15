@@ -31,12 +31,11 @@
 		},
 
 		mounted() {
-			this.tpLoteria = this.props.tpLoteria;
+			tpLoteria = this.props.tpLoteria;
 		},
 
 		data() {
 			return {
-				tpLoteria: '',
 				tiposLoterias: tiposLoteria
 			};
 		}

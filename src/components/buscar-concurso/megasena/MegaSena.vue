@@ -120,7 +120,7 @@
 		concursos = null;
 
 		cadastrarJogo() {
-			console.log("cadastrar jogo");
+			console.log('teste');
 		}
 
 		buscarConcursos() {
