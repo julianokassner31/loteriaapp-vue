@@ -115,10 +115,10 @@
 				],
 				linksSaidaDezenas: [
 					{
-						title: 'Megasena',
-						link: '/saidadezenas/megasena',
+						title: 'Contador de posições de dezenas',
+						link: '/counter-posicoes',
 						icon: 'format_list_numbered',
-						titleHeader: 'Quantas X já saiu'
+						titleHeader: 'Contador de posições de dezenas'
 					}
 				],
 				linksSeguros: [

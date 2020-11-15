@@ -1,6 +1,8 @@
 <template>
 	<div>
 		<q-select
+			v-bind:item-aligned="true"
+			outlined
 			:options="tpsLoterias"
 			v-model="tpLoteria"
 		>
@@ -8,7 +10,7 @@
 		<q-card class="row q-my-md q-py-sm align-center justify-around col-sm-9 col-md-10">
 			<p class="text-h6">Posições</p>
 		</q-card>
-		<q-infinite-scroll class="q-mb-lg" @load="loadList" :offset="250">
+		<q-infinite-scroll ref="qInfiniteScroll" class="q-mb-lg" @load="loadList" :offset="250">
 			<q-card class="row q-my-sm q-py-md">
 				<q-card class="dezena col-sm-3 col-md-2">
 					<q-card-section>
@@ -35,6 +37,7 @@
 						<dezenaConcurso
 							:match="true"
 							:dezena="key"
+							:tpLoteria="tpLoteria"
 						/>
 						<div class="q-mt-md q-mt-sm text-subtitle2">saiu {{sumVezesSaida(key)}}</div>
 					</q-card-section>
@@ -59,71 +62,63 @@
 </template>
 
 <script lang="ts">
-	import { Component, Vue } from 'vue-property-decorator';
-	import API from '../../../api';
+	import { Component, Vue, Watch } from 'vue-property-decorator';
+	import API from '../../api';
 	import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue';
-	import {tiposLoteria} from 'components/index';
+	import { tiposLoteria } from 'components/index';
 
 	@Component({
 		components: {
 			dezenaConcurso: DezenaConcurso
 		}
 	})
-	export default class SaidaDezenas extends Vue {
-		private tpLoteria = 'MEGASENA';
-		private tpsLoterias = [tiposLoteria.MEGASENA, tiposLoteria.LOTOFACIL];
-
-		private posicoesTitle = [
-			{ posicao: '1ª' },
-			{ posicao: '2ª' },
-			{ posicao: '3ª' },
-			{ posicao: '4ª' },
-			{ posicao: '5ª' },
-			{ posicao: '6ª' }
-		];
-
+	export default class CounterPosicoes extends Vue {
+		private tpLoteria = tiposLoteria.MEGASENA.tpLoteria;
+		private tpsLoterias = [tiposLoteria.MEGASENA.tpLoteria, tiposLoteria.LOTOFACIL.tpLoteria];
+		private posicoesTitle: {posicao:string} [] = [];
 		private counterPosicoes: any = {};
 
-		private loadList(index: number, done: Function) {
-			const scrollHeight = document.documentElement.scrollHeight;
-			const scrollTop = document.documentElement.scrollTop;
-			const clientHeight = document.documentElement.clientHeight;
-			if (index <= 5) {
-				API.get(`/${this.tpLoteria.toLowerCase()}/counterPosicoes?page=${index * 10}&tpLoteria=${this.tpLoteria}`)
-					.then((resp: any) => {
-						Object.keys(resp.data).forEach(key => {
-							Vue.set(this.counterPosicoes, key, resp.data[key]);
-						});
-						done();
-					});
+		@Watch('tpLoteria')
+		onPropertyChanged(value: string, oldValue: string) {
+			this.getPosicoesTitle();
+			this.counterPosicoes = {};
+			this.$refs.qInfiniteScroll.reset();
+			this.$refs.qInfiniteScroll.resume();
+			this.requestCounterPosicoes(0);
 
+		}
+
+		async mounted() {
+			await this.requestCounterPosicoes(0);
+		}
+
+		getPosicoesTitle() {
+			this.posicoesTitle = tiposLoteria.MEGASENA.posicoes;
+
+			if (this.tpLoteria === tiposLoteria.LOTOFACIL.tpLoteria) {
+				this.posicoesTitle = tiposLoteria.LOTOFACIL.posicoes;
 			}
 		}
 
-		beforeMount() {
-
-			if (this.tpLoteria === 'LOTOFACIL') {
-				this.posicoesTitle = this.posicoesTitle.concat([
-					{ posicao: '7ª' },
-					{ posicao: '8ª' },
-					{ posicao: '9ª' },
-					{ posicao: '10ª' },
-					{ posicao: '11ª' },
-					{ posicao: '12ª' },
-					{ posicao: '13ª' },
-					{ posicao: '14ª' },
-					{ posicao: '15ª' }
-				]);
+		async loadList(index: number, done: Function) {
+			if (index <= 5) {
+				await this.requestCounterPosicoes(index);
+				done();
+			} else {
+				done(true);
 			}
+		}
 
-
-			API.get(`/${this.tpLoteria.toLowerCase()}/counterPosicoes?page=0&tpLoteria=${this.tpLoteria}`)
+		async requestCounterPosicoes(offset: number) {
+			await API.get(`/${this.tpLoteria.toLowerCase()}/counterPosicoes?page=${offset * 10}&tpLoteria=${this.tpLoteria}`)
 				.then((resp: any) => {
-					this.counterPosicoes = resp.data;
+					Object.keys(resp.data).forEach(key => {
+						Vue.set(this.counterPosicoes, key, resp.data[key]);
+					});
 				});
 		}
 
-		public sumVezesSaida(key: string) {
+		sumVezesSaida(key: string) {
 			const counter = this.counterPosicoes[parseInt(key)];
 			return counter.reduce((prev: number, c: any) => prev += c.count, 0);
 		}

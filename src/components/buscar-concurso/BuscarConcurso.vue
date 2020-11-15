@@ -1,20 +1,17 @@
 <template>
 	<div>
 		<q-select
-			filled
+			:item-aligned="true"
+			outlined
 			v-model="model"
 			:options="options"
-			label="Selecione"
-			emit-value
-			bg-color="white"
-			v-bind:outlined="true"
 		>
 		</q-select>
 
-		<div v-if="model === 'MEGASENA'">
+		<div v-if="model === tiposLoteria.MEGASENA.tpLoteria">
 			<MegaSena v-bind:is-cadastro="false"/>
 		</div>
-		<div v-if="model === 'LOTOFACIL'">
+		<div v-if="model === tiposLoteria.LOTOFACIL.tpLoteria">
 			<Lotomania v-bind:is-cadastro="false"/>
 		</div>
 
@@ -34,10 +31,11 @@
 		},
 		data() {
 			return {
-				model: tiposLoteria.MEGASENA,
+				model: tiposLoteria.MEGASENA.tpLoteria,
+				tiposLoteria: tiposLoteria,
 				options: [
-					tiposLoteria.MEGASENA,
-					tiposLoteria.LOTOFACIL
+					tiposLoteria.MEGASENA.tpLoteria,
+					tiposLoteria.LOTOFACIL.tpLoteria
 				]
 			};
 		}

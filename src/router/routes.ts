@@ -11,12 +11,8 @@ const routes: RouteConfig[] = [
 				component: () => import('pages/../components/buscar-concurso/BuscarConcurso.vue')
 			},
 			{
-				path: 'saidadezenas/megasena',
-				component: () => import('pages/megasena/saida-dezenas/SaidaDezenas.vue')
-			},
-			{
-				path: 'counterPosicao',
-				component: () => import('pages/counterPosicao/CounterPosicao.vue')
+				path: 'counter-posicoes',
+				component: () => import('pages/counter-posicoes/CounterPosicoes.vue')
 			},
 			{
 				path: 'login',
