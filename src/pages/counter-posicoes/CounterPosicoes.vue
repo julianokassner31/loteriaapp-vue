@@ -82,8 +82,8 @@
 		onPropertyChanged(value: string, oldValue: string) {
 			this.getPosicoesTitle();
 			this.counterPosicoes = {};
-			this.$refs.qInfiniteScroll.reset();
-			this.$refs.qInfiniteScroll.resume();
+			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
+			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
 			this.requestCounterPosicoes(0);
 
 		}
