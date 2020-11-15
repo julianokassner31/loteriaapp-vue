@@ -2,6 +2,7 @@ import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 import titleHeader from './titleHeader';
 import usuario from './usuario';
+import colorHeader from './colorHeader'
 
 // import example from './module-example'
 // import exampleState from './module-example/state'
@@ -23,7 +24,8 @@ export default store(function({ Vue }) {
 	const Store = new Vuex.Store({
 		modules: {
 			usuario,
-			titleHeader
+			titleHeader,
+			colorHeader
 		},
 
 		// enable strict mode (adds overhead!)

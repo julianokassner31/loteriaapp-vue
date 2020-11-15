@@ -1,7 +1,7 @@
 <template>
 	<q-layout view="lHh Lpr lFf">
-		<q-header elevated>
-			<q-toolbar class="bg-positive">
+		<q-header elevated :class="colorHeader">
+			<q-toolbar >
 				<q-btn
 					flat
 					dense
@@ -12,7 +12,7 @@
 					@click="leftDrawerOpen = !leftDrawerOpen"
 				/>
 
-				<q-toolbar-title class="bg-positive text-center">
+				<q-toolbar-title :class="[colorHeader, 'text-center']">
 					{{titleHeader}}
 				</q-toolbar-title>
 
@@ -139,6 +139,11 @@
 			titleHeader: {
 				get() {
 					return this.$store.state.titleHeader.titleHeader;
+				}
+			},
+			colorHeader: {
+				get() {
+					return this.$store.state.colorHeader.colorHeader
 				}
 			}
 		}

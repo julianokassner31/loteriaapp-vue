@@ -66,6 +66,7 @@
 	import API from '../../api';
 	import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue';
 	import { LOTERIAS } from 'components/index';
+	import AtualizaColorHeader from 'src/util/AtualizaColorHeader';
 
 	@Component({
 		components: {
@@ -85,6 +86,8 @@
 			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
 			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
 			this.requestCounterPosicoes(0);
+			const tp = this.tpLoteria.toUpperCase();
+			AtualizaColorHeader.atualizar(this.$store, 'bg-'+LOTERIAS[tp.toString()].color);
 		}
 
 		async mounted() {

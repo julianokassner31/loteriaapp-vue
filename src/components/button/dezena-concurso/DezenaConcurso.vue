@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import { LOTERIAS } from 'components/index.js';
+	import { LOTERIAS } from 'components/index';
 
 	export default {
 		name: 'DezenaConcurso',
@@ -32,7 +32,6 @@
 
 		data() {
 			return {
-				loterias: LOTERIAS,
 				color: LOTERIAS.MEGASENA.color
 			};
 		},
