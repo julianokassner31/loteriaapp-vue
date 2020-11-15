@@ -1,13 +1,5 @@
 <template>
 	<div>
-<!--		<q-select-->
-<!--			:item-aligned="true"-->
-<!--			outlined-->
-<!--			v-model="model"-->
-<!--			:options="options"-->
-<!--		>-->
-<!--		</q-select>-->
-
 		<SelectTpLoteria @emitChangeTpLoteria="changeTpLoteria"></SelectTpLoteria>
 
 		<div v-if="model === tiposLoteria.MEGASENA.tpLoteria">

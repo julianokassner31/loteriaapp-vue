@@ -76,6 +76,7 @@
 		private counterPosicoes: any = {};
 
 		async mounted() {
+			this.getPosicoesTitle();
 			await this.requestCounterPosicoes(0);
 		}
 
@@ -87,9 +88,9 @@
 		}
 
 		changeTpLoteria(val: string) {
+			this.tpLoteria = val;
 			this.getPosicoesTitle();
 			this.counterPosicoes = {};
-			this.tpLoteria = val;
 			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
 			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
 			this.requestCounterPosicoes(0);
