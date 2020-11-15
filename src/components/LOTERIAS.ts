@@ -32,6 +32,16 @@ export const LOTERIAS = {
 			{ posicao: '14ª' },
 			{ posicao: '15ª' }
 		]
+	},
+
+	getColor(tpLoteria: string) {
+		switch (tpLoteria) {
+			case 'MEGASENA':
+				return this.MEGASENA.color;
+
+			case 'LOTOFACIL':
+				return this.LOTOFACIL.color;
+		}
 	}
 };
 

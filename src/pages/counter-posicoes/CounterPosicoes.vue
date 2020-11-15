@@ -1,12 +1,7 @@
 <template>
 	<div>
-		<q-select
-			v-bind:item-aligned="true"
-			outlined
-			:options="tpsLoterias"
-			v-model="tpLoteria"
-		>
-		</q-select>
+		<SelectTpLoteria  @emitChangeTpLoteria="changeTpLoteria"></SelectTpLoteria>
+
 		<q-card class="row q-my-md q-py-sm align-center justify-around col-sm-9 col-md-10">
 			<p class="text-h6">Posições</p>
 		</q-card>
@@ -62,33 +57,23 @@
 </template>
 
 <script lang="ts">
-	import { Component, Vue, Watch } from 'vue-property-decorator';
+	import { Component, Vue } from 'vue-property-decorator';
 	import API from '../../api';
 	import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue';
 	import { LOTERIAS } from 'components/index';
 	import AtualizaColorHeader from 'src/util/AtualizaColorHeader';
+	import SelectTpLoteria from 'components/select-tploteria/SelectTpLoteria.vue';
 
 	@Component({
 		components: {
+			SelectTpLoteria,
 			dezenaConcurso: DezenaConcurso
 		}
 	})
 	export default class CounterPosicoes extends Vue {
 		private tpLoteria = LOTERIAS.MEGASENA.tpLoteria;
-		private tpsLoterias = LOTERIAS.tipos;
 		private posicoesTitle: {posicao:string} [] = [];
 		private counterPosicoes: any = {};
-
-		@Watch('tpLoteria')
-		onPropertyChanged(value: string, oldValue: string) {
-			this.getPosicoesTitle();
-			this.counterPosicoes = {};
-			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
-			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
-			this.requestCounterPosicoes(0);
-			const tp = this.tpLoteria.toUpperCase();
-			AtualizaColorHeader.atualizar(this.$store, 'bg-'+LOTERIAS[tp.toString()].color);
-		}
 
 		async mounted() {
 			await this.requestCounterPosicoes(0);
@@ -96,10 +81,20 @@
 
 		getPosicoesTitle() {
 			this.posicoesTitle = LOTERIAS.MEGASENA.posicoes;
-
 			if (this.tpLoteria === LOTERIAS.LOTOFACIL.tpLoteria) {
 				this.posicoesTitle = LOTERIAS.LOTOFACIL.posicoes;
 			}
+		}
+
+		changeTpLoteria(val: string) {
+			this.getPosicoesTitle();
+			this.counterPosicoes = {};
+			this.tpLoteria = val;
+			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
+			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
+			this.requestCounterPosicoes(0);
+			const color = LOTERIAS.getColor(val);
+			AtualizaColorHeader.atualizar(this.$store, 'bg-'+color);
 		}
 
 		async loadList(index: number, done: Function) {

@@ -1,12 +1,14 @@
 <template>
 	<div>
-		<q-select
-			:item-aligned="true"
-			outlined
-			v-model="model"
-			:options="options"
-		>
-		</q-select>
+<!--		<q-select-->
+<!--			:item-aligned="true"-->
+<!--			outlined-->
+<!--			v-model="model"-->
+<!--			:options="options"-->
+<!--		>-->
+<!--		</q-select>-->
+
+		<SelectTpLoteria @emitChangeTpLoteria="changeTpLoteria"></SelectTpLoteria>
 
 		<div v-if="model === tiposLoteria.MEGASENA.tpLoteria">
 			<MegaSena v-bind:is-cadastro="false"/>
@@ -21,13 +23,15 @@
 <script>
 	import MegaSena from 'src/components/buscar-concurso/megasena/MegaSena';
 	import Lotomania from 'src/components/buscar-concurso/lotomania/Lotomania';
+	import SelectTpLoteria from 'src/components/select-tploteria/SelectTpLoteria';
 	import {LOTERIAS} from '../index';
 
 	export default {
 		name: 'BuscarConcurso',
 		components: {
 			MegaSena,
-			Lotomania
+			Lotomania,
+			SelectTpLoteria
 		},
 		data() {
 			return {
@@ -35,6 +39,11 @@
 				tiposLoteria: LOTERIAS,
 				options: LOTERIAS.tipos
 			};
+		},
+		methods: {
+			changeTpLoteria: function(val) {
+				alert(val)
+			}
 		}
 	};
 </script>
