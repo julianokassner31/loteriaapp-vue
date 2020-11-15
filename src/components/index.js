@@ -4,7 +4,7 @@ import { dezenasLotoMania, dezenasMegasena } from './button/dezena/dezenas.js';
 import CardConcurso from './cards/card-concurso/CardConcurso.vue';
 import CardDezena from './cards/card-dezena/CardDezena.vue';
 import Login from './login/Login.vue';
-import { tiposLoteria } from './TiposLoteria';
+import { LOTERIAS } from './LOTERIAS';
 
 export {
 	DezenaButton,
@@ -14,5 +14,5 @@ export {
 	dezenasMegasena,
 	dezenasLotoMania,
 	Login,
-	tiposLoteria
+	LOTERIAS
 };

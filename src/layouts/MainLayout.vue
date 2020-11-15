@@ -37,18 +37,13 @@
 
 				<EssentialLink
 					v-bind="{
-            title: 'Home',
-            icon: 'home',
-            link: '/',
-            titleHeader: 'Últimos concursos'
-          }"
+					title: 'Home',
+					icon: 'home',
+					link: '/',
+					titleHeader: 'Últimos concursos'
+          			}"
 				/>
 				<q-separator/>
-				<q-item>
-					<q-item-section>
-						<q-item-label header> Meu jogo já saiu?</q-item-label>
-					</q-item-section>
-				</q-item>
 				<q-separator/>
 				<EssentialLink
 					v-for="(link, index) in essentialLinks"
@@ -56,11 +51,6 @@
 					v-bind="link"
 				/>
 				<q-separator/>
-				<q-item>
-					<q-item-section>
-						<q-item-label header>Quantas X já saiu</q-item-label>
-					</q-item-section>
-				</q-item>
 				<q-separator/>
 				<EssentialLink
 					v-for="(link, index) in linksSaidaDezenas"
@@ -115,10 +105,9 @@
 				],
 				linksSaidaDezenas: [
 					{
-						title: 'Contador de posições de dezenas',
+						title: 'Contador dezenas',
 						link: '/counter-posicoes',
-						icon: 'format_list_numbered',
-						titleHeader: 'Contador de posições de dezenas'
+						icon: 'format_list_numbered'
 					}
 				],
 				linksSeguros: [
@@ -127,6 +116,12 @@
 						action: '/saidadezenas/megasena',
 						icon: 'loop',
 						titleHeader: 'Atualizar resultados Megasena'
+					},
+					{
+						title: 'Lotofácil',
+						action: '/saidadezenas/megasena',
+						icon: 'loop',
+						titleHeader: 'Atualizar resultados Lotofácil'
 					}
 				]
 			};

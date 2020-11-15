@@ -2,7 +2,7 @@
 	<q-btn v-if="match"
 		   round
 		   :label="dezena"
-		   color="positive"/>
+		   :color="color"/>
 	<q-btn v-else
 		   round
 		   outline
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-	import { tiposLoteria } from 'components/index.js';
+	import { LOTERIAS } from 'components/index.js';
 
 	export default {
 		name: 'DezenaConcurso',
 		props: {
 			dezena: {
-				type: Number,
+				type: String,
 				required: true
 			},
 			match: {
@@ -30,23 +30,26 @@
 			}
 		},
 
-		mounted() {
-			tpLoteria = this.props.tpLoteria;
-		},
-
 		data() {
 			return {
-				tiposLoterias: tiposLoteria
+				loterias: LOTERIAS,
+				color: LOTERIAS.MEGASENA.color
 			};
+		},
+
+		watch: {
+			tpLoteria: {
+				immediate: true,
+				handler: function(newVal, oldVal) {
+					const tp = this.tpLoteria.toUpperCase();
+					this.color = LOTERIAS[tp].color;
+				}
+			}
 		}
 	};
 </script>
 
 <style>
-
-	.accent {
-		background: $purple-4;
-	}
 
 	@media (max-width: 600px) {
 		.q-btn {

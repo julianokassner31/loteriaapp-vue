@@ -21,7 +21,7 @@
 <script>
 	import MegaSena from 'src/components/buscar-concurso/megasena/MegaSena';
 	import Lotomania from 'src/components/buscar-concurso/lotomania/Lotomania';
-	import {tiposLoteria} from '../index';
+	import {LOTERIAS} from '../index';
 
 	export default {
 		name: 'BuscarConcurso',
@@ -31,12 +31,9 @@
 		},
 		data() {
 			return {
-				model: tiposLoteria.MEGASENA.tpLoteria,
-				tiposLoteria: tiposLoteria,
-				options: [
-					tiposLoteria.MEGASENA.tpLoteria,
-					tiposLoteria.LOTOFACIL.tpLoteria
-				]
+				model: LOTERIAS.MEGASENA.tpLoteria,
+				tiposLoteria: LOTERIAS,
+				options: LOTERIAS.tipos
 			};
 		}
 	};

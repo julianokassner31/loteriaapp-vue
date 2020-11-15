@@ -19,7 +19,7 @@
 				</q-card>
 				<q-card class="row justify-around col-sm-9 col-md-10">
 					<q-card v-for="pos in this.posicoesTitle"
-							:key="pos"
+							:key="pos.posicao"
 					>
 						<q-card-section>
 							<div class="text-h6">{{pos.posicao}}</div>
@@ -65,7 +65,7 @@
 	import { Component, Vue, Watch } from 'vue-property-decorator';
 	import API from '../../api';
 	import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue';
-	import { tiposLoteria } from 'components/index';
+	import { LOTERIAS } from 'components/index';
 
 	@Component({
 		components: {
@@ -73,8 +73,8 @@
 		}
 	})
 	export default class CounterPosicoes extends Vue {
-		private tpLoteria = tiposLoteria.MEGASENA.tpLoteria;
-		private tpsLoterias = [tiposLoteria.MEGASENA.tpLoteria, tiposLoteria.LOTOFACIL.tpLoteria];
+		private tpLoteria = LOTERIAS.MEGASENA.tpLoteria;
+		private tpsLoterias = LOTERIAS.tipos;
 		private posicoesTitle: {posicao:string} [] = [];
 		private counterPosicoes: any = {};
 
@@ -85,7 +85,6 @@
 			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
 			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
 			this.requestCounterPosicoes(0);
-
 		}
 
 		async mounted() {
@@ -93,10 +92,10 @@
 		}
 
 		getPosicoesTitle() {
-			this.posicoesTitle = tiposLoteria.MEGASENA.posicoes;
+			this.posicoesTitle = LOTERIAS.MEGASENA.posicoes;
 
-			if (this.tpLoteria === tiposLoteria.LOTOFACIL.tpLoteria) {
-				this.posicoesTitle = tiposLoteria.LOTOFACIL.posicoes;
+			if (this.tpLoteria === LOTERIAS.LOTOFACIL.tpLoteria) {
+				this.posicoesTitle = LOTERIAS.LOTOFACIL.posicoes;
 			}
 		}
 
