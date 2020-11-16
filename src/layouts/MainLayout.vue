@@ -34,27 +34,9 @@
 				</q-item>
 
 				<q-separator/>
-
-				<EssentialLink
-					v-bind="{
-					title: 'Home',
-					icon: 'home',
-					link: '/',
-					titleHeader: 'Últimos concursos'
-          			}"
-				/>
-				<q-separator/>
-				<q-separator/>
 				<EssentialLink
 					v-for="(link, index) in essentialLinks"
 					:key="'link'+index"
-					v-bind="link"
-				/>
-				<q-separator/>
-				<q-separator/>
-				<EssentialLink
-					v-for="(link, index) in linksSaidaDezenas"
-					:key="'saida'+index"
 					v-bind="link"
 				/>
 				<q-separator/>
@@ -97,18 +79,30 @@
 				leftDrawerOpen: false,
 				essentialLinks: [
 					{
-						title: 'Buscar Concursos',
+						title: 'Home',
+						link: '/',
+						icon: 'home',
+						titleHeader: 'Últimos concursos'
+					},
+					{
+						title: 'Ver todos os sorteios',
+						link: '/allconcursos',
+						icon: 'search',
+						titleHeader: 'Ver todos os sorteios'
+					},
+					{
+						title: 'Meu Jogo já saiu?',
 						link: '/buscarjogos',
 						icon: 'done',
 						titleHeader: 'Meu jogo já saiu?'
-					}
-				],
-				linksSaidaDezenas: [
+					},
 					{
 						title: 'Contador dezenas',
-						link: '/counter-posicoes',
-						icon: 'format_list_numbered'
+						link: '/counterposicoes',
+						icon: 'format_list_numbered',
+						titleHeader: 'Quantas vezes a dezena saiu?'
 					}
+
 				],
 				linksSeguros: [
 					{

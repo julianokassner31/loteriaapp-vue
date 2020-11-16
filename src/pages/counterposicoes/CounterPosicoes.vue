@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<SelectTpLoteria  @emitChangeTpLoteria="changeTpLoteria"></SelectTpLoteria>
+		<SelectTpLoteria @emitChangeTpLoteria="changeTpLoteria"></SelectTpLoteria>
 
 		<q-card class="row q-my-md q-py-sm align-center justify-around col-sm-9 col-md-10">
 			<p class="text-h6">Posições</p>
@@ -43,7 +43,7 @@
 						:key="index-dezena.dezena"
 					>
 						<q-card-section>
-							<div class="text-h6">{{dezena.count}}</div>
+							<div class="text-h6 ">{{dezena.count}}</div>
 						</q-card-section>
 					</q-card>
 				</q-card>
@@ -61,8 +61,7 @@
 	import API from '../../api';
 	import DezenaConcurso from 'components/button/dezena-concurso/DezenaConcurso.vue';
 	import { LOTERIAS } from 'components/index';
-	import AtualizaColorHeader from 'src/util/AtualizaColorHeader';
-	import SelectTpLoteria from 'components/select-tploteria/SelectTpLoteria.vue';
+	import { SelectTpLoteria } from 'components/index.js';
 
 	@Component({
 		components: {
@@ -72,7 +71,7 @@
 	})
 	export default class CounterPosicoes extends Vue {
 		private tpLoteria = LOTERIAS.MEGASENA.tpLoteria;
-		private posicoesTitle: {posicao:string} [] = [];
+		private posicoesTitle: { posicao: string } [] = [];
 		private counterPosicoes: any = {};
 
 		async mounted() {
@@ -91,11 +90,9 @@
 			this.tpLoteria = val;
 			this.getPosicoesTitle();
 			this.counterPosicoes = {};
-			(this.$refs.qInfiniteScroll as Vue & {reset: () => void}).reset();
-			(this.$refs.qInfiniteScroll as Vue & {resume: () => void}).resume();
+			(this.$refs.qInfiniteScroll as Vue & { reset: () => void }).reset();
+			(this.$refs.qInfiniteScroll as Vue & { resume: () => void }).resume();
 			this.requestCounterPosicoes(0);
-			const color = LOTERIAS.getColor(val);
-			AtualizaColorHeader.atualizar(this.$store, 'bg-'+color);
 		}
 
 		async loadList(index: number, done: Function) {

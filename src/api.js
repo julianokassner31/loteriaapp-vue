@@ -2,9 +2,8 @@ import axios from 'axios';
 import { Loading } from 'quasar';
 
 const API = axios.create({
-	baseURL: process.env.PROD
-		? 'https://loteria-api.herokuapp.com'
-		: 'http://localhost:8080'
+	baseURL: 'https://loteria-api.herokuapp.com'
+	// baseURL: 'http://localhost:8080'
 });
 
 API.interceptors.request.use(

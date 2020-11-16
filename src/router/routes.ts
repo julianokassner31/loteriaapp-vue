@@ -8,11 +8,15 @@ const routes: RouteConfig[] = [
 			{ path: '', component: () => import('pages/Index.vue') },
 			{
 				path: 'buscarjogos',
-				component: () => import('pages/../components/buscar-concurso/BuscarConcurso.vue')
+				component: () => import('pages/buscarjogos/BuscarConcurso.vue')
 			},
 			{
-				path: 'counter-posicoes',
-				component: () => import('pages/counter-posicoes/CounterPosicoes.vue')
+				path: 'counterposicoes',
+				component: () => import('pages/counterposicoes/CounterPosicoes.vue')
+			},
+			{
+				path: 'allconcursos',
+				component: () => import('pages/allconcursos/AllConcursos.vue')
 			},
 			{
 				path: 'login',

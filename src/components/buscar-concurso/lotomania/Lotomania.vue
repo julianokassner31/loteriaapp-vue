@@ -110,7 +110,7 @@
 
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator';
-	import { DezenaButton, DezenaConcurso, dezenasLotoMania } from 'components/index.js';
+	import { DezenaButton, DezenaConcurso, LOTERIAS } from 'components/index.js';
 
 	@Component({
 		components: {
@@ -125,7 +125,7 @@
 	})
 	export default class LotoMania extends Vue {
 
-		dezenasLotoMania: number[] = dezenasLotoMania;
+		dezenasLotoMania: number[] = LOTERIAS.LOTOFACIL.dezenas;
 		dezenasEscolhidas: number[] = [];
 		concursos = null;
 

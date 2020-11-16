@@ -4,15 +4,13 @@
     <CardConcurso v-for="loteria of tipoLoteria"
       :key="loteria.id"
       :title="loteria.title"
-      :classBg="loteria.classBg"
-      :uri="loteria.uri"
-      :color="loteria.color"
+      :tpLoteria="loteria.tpLoteria"
     />
   </div>
 </template>
 
 <script>
-import {CardConcurso} from '../components/index.js';
+import {CardConcurso, LOTERIAS} from '../components/index.js';
 
 export default {
   name: 'PageIndex',
@@ -23,9 +21,9 @@ export default {
   data() {
     return {
       tipoLoteria: [
-        {id:1,title:'MegaSena',classBg:'bg-megasena',uri:'/megasena',color:'secondary'},
+        {id:1,title:'MegaSena',tpLoteria: LOTERIAS.MEGASENA.tpLoteria},
+        {id:3,title:'Lotofácil',tpLoteria: LOTERIAS.LOTOFACIL.tpLoteria},
         // {id:2,title:'Dia de Sorte',classBg:'bg-diadesorte',uri:'/megasena',color:'light-green'},
-        {id:3,title:'Lotofácil',classBg:'bg-lotofacil',uri:'/lotofacil',color:'purple'},
         // {id:4,title:'Loteria Federal',classBg:'bg-loteriafederal',uri:'/megasena',color:'indigo'},
         // {id:5,title:'Lotomania',classBg:'bg-lotomania',uri:'/megasena',color:'amber-6'},
         // {id:6,title:'Timemania',classBg:'bg-timemania',uri:'/megasena',color:'orange-10'},

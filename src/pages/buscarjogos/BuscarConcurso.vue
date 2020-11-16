@@ -16,7 +16,7 @@
 	import MegaSena from 'src/components/buscar-concurso/megasena/MegaSena';
 	import Lotomania from 'src/components/buscar-concurso/lotomania/Lotomania';
 	import SelectTpLoteria from 'src/components/select-tploteria/SelectTpLoteria';
-	import {LOTERIAS} from '../index';
+	import {LOTERIAS} from '../../components';
 
 	export default {
 		name: 'BuscarConcurso',

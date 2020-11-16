@@ -40,8 +40,7 @@
 			tpLoteria: {
 				immediate: true,
 				handler: function(newVal, oldVal) {
-					const tp = this.tpLoteria.toUpperCase();
-					this.color = LOTERIAS[tp].color;
+					this.color = LOTERIAS.getType(newVal).color
 				}
 			}
 		}

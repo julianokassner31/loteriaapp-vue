@@ -23,7 +23,7 @@
 		},
 		watch: {
 			tpLoteria: function(newVal) {
-				AtualizaColorHeader.atualizar(this.$store, 'bg-' + LOTERIAS[newVal.toString()].color);
+				AtualizaColorHeader.atualizar(this.$store, 'bg-' + LOTERIAS.getType(this.tpLoteria).color);
 			}
 		},
 

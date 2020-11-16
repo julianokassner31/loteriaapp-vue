@@ -1,22 +1,22 @@
 <template>
-	<div v-if="concurso" class="col-12 col-md-6 col-lg-4 q-pa-sm">
-		<q-card v-bind:class="classBg">
-			<q-card-section>
-				<div class="row justify-between">
-					<div class="text-h6 title">{{title}}</div>
+	<div v-if="concurso" class="col-12 q-pa-sm">
+		<q-card :class="bgColor">
+			<q-card-section class="text-weight-bolder">
+				<div class="row justify-start">
+					<div v-if="title" class="text-h5 title q-mr-md text-weight-bolder">{{title}}</div>
 					<div
 						v-if="concurso.acumulado"
-						class="text-h6 title">
+						class="q-px-md text-h6 title bg-red-5 text-weight-bolder">
 						Acumulou!!!
 					</div>
 				</div>
 
-				<div class="q-pb-sm text-subtitle2 title">Concurso nº {{concurso.idConcurso}} {{concurso.dtSorteio |
+				<div class="q-pb-sm text-subtitle2 title text-weight-bolder">Concurso nº {{concurso.idConcurso}} {{concurso.dtSorteio |
 					dateFormat('DD/MM/YYYY')}}
 				</div>
 
-				<div v-if="!ordemSorteio" class="caption">Orderm sorteio</div>
-				<div v-if="ordemSorteio" class="caption">Orderm natural</div>
+				<div v-if="!ordemSorteio" class="caption text-weight-bolder">Orderm sorteio</div>
+				<div v-if="ordemSorteio" class="caption text-weight-bolder">Orderm natural</div>
 				<div
 					@click="ordernar()"
 					class="wrap row items-center justify-between">
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+	import {LOTERIAS} from 'components/index';
 
 	export default {
 		name: 'CardConcurso',
@@ -42,72 +43,49 @@
 		props: {
 			title: {
 				type: String,
-				required: true
+				required: false
 			},
-			classBg: {
+			tpLoteria: {
 				type: String,
 				required: true
 			},
-			color: {
-				type: String,
-				default: 'green-7',
-				required: true
-			},
-			uri: {
-				type: String,
+			concurso: {
+				type: Object,
 				required: false
 			}
 		},
 
 		data() {
 			return {
-				concurso: undefined,
+				concurso: this.$props.concurso,
 				dezenas: [],
-				ordemSorteio: true
+				ordemSorteio: true,
+				bgColor: '',
+				color: ''
 			};
 		},
 
-		created() {
-			if (this.$props.uri) {
-				this.$axios.get(this.$props.uri).then(resp => {
+		async created() {
+			const loteria = LOTERIAS.getType(this.$props.tpLoteria);
+			this.bgColor = loteria.bgColor;
+			this.color = loteria.color;
+			if (!this.$props.concurso) {
+				await this.$axios.get(loteria.uri).then(resp => {
 					this.concurso = resp.data;
-					this.ordernar();
 				});
 			}
+
+			this.ordernar();
 		},
 
 		methods: {
-			ordemConcurso() {
-				this.dezenas = [
-					this.concurso.prDezena,
-					this.concurso.seDezena,
-					this.concurso.teDezena,
-					this.concurso.qaDezena,
-					this.concurso.qiDezena,
-					this.concurso.sxDezena
-				];
-
-				if (this.$props.uri === '/lotofacil') {
-					this.dezenas = this.dezenas.concat([
-						this.concurso.stDezena,
-						this.concurso.otDezena,
-						this.concurso.noDezena,
-						this.concurso.dcDezena,
-						this.concurso.dprDezena,
-						this.concurso.dseDezena,
-						this.concurso.dteDezena,
-						this.concurso.dqaDezena,
-						this.concurso.dqiDezena
-					]);
-				}
-			},
-
 			ordernar() {
 
 				if (this.ordemSorteio) {
-					this.ordemConcurso();
+					this.dezenas = LOTERIAS.getDezenasOrdemConcurso(this.$props.tpLoteria, this.concurso);
+
 				} else {
-					this.dezenas.sort((a, b) => a < b ? -1 : 1);
+					this.dezenas = LOTERIAS.getDezenasOrdenadas(this.$props.tpLoteria, this.concurso);
 				}
 
 				this.ordemSorteio = !this.ordemSorteio;

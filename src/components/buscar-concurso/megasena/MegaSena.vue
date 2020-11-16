@@ -100,7 +100,7 @@
 
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator';
-	import { DezenaButton, DezenaConcurso, dezenasMegasena } from 'components/index.js';
+	import { DezenaButton, DezenaConcurso, LOTERIAS } from 'components/index.js';
 
 	@Component({
 		components: {
@@ -115,7 +115,7 @@
 	})
 	export default class MegaSena extends Vue {
 
-		dezenasMegasena: number[] = dezenasMegasena;
+		dezenasMegasena: number[] = LOTERIAS.MEGASENA.dezenas;
 		dezenasEscolhidas: number[] = [];
 		concursos = null;
 
