@@ -57,7 +57,6 @@
 
 		data() {
 			return {
-				concurso: this.$props.concurso,
 				dezenas: [],
 				ordemSorteio: true,
 				bgColor: '',
